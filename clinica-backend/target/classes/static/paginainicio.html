@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio - Clínica Señor de Luren</title>
+    <link rel="stylesheet" href="css/inicio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400&display=swap" rel="stylesheet">
+  </head>
+  <header>
+      <div class="container-wrapper">
+          <div class="logo-container">
+              <div class="logo">
+                  <a href="/public/acerdaDe.html">
+                      <img src="images/logo clinica señor de Luren.png" alt="Logo de la Clínica">
+                  </a>
+              </div>
+          </div>
+              
+                 <div class="menu-container">
+                  <ul class="nav-menu">
+                      <li><a href="paginainicio.html" class="active">INICIO</a></li>
+                      <li><a href="servicios.html">SERVICIOS</a></li>
+                      <li><a href="especialidades.html">ESPECIALIDADES</a></li>
+                      <li><a href="reviews.html">REVIEWS</a></li>
+                      <li><a href="noticias.html">NOTICIAS</a></li>
+                      <li><a href="contactos.html">CONTACTOS</a></li>
+                      <li><a href="agendarCita.html">RESERVAS</a></li>
+                  </ul>
+                </div>
+                 <div class="nav-buttons-container">
+                     <ul class="nav-buttons">
+                 <li><a href="login.html">INICIAR SESION</a></li>
+                 <li><a href="#" onclick="toggleRegisterOptions()">REGISTRAR</a></li>
+                </ul>  
+         </div>
+      </div>
+  </header>
+
+<div id="register-options" style="display: none; text-align: center; margin-top: 80px;">
+  <p>Elija una opción para registrarse</p>
+  <button onclick="window.location.href='registroPaciente.html'">Registrar como Paciente</button>
+  <button onclick="window.location.href='registroMedico.html'">Registrar como Médico</button>
+  <span class="close-span" onclick="toggleRegisterOptions()">&#x2716;</span>
+</div>
+
+<section class="image-section">
+  <div class="image-container">
+      <img src="images/portada.jpg" alt="portada">
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="contenedor-servicios-1">
+      <div class="contenedor-texto">
+          <h3> A Tu Servicio</h3>
+      </div>
+      <div class="contenedor-boton">
+          <a href="servicios.html" class="ver-servicios-btn">VER TODOS LOS SERVICIOS</a>
+      </div>
+  </div>
+  <div class="contenedor-servicios-2">
+      <div class="servicio">
+          <i class="fas fa-ambulance"></i> <!-- Ícono de Ambulancia -->
+          <h3>Ambulancia</h3>
+          <p>Tenemos una ambulancia disponible las 24 horas del día, los 7 días de la semana, con el equipamiento adecuado para el transporte asistido de los pacientes.</p>
+          <a href="servicios.html" class="ver-mas-btn">VER MÁS</a>
+      </div>
+      <div class="servicio">
+          <i class="fas fa-flask"></i> <!-- Ícono de Laboratorio -->
+          <h3>Laboratorio</h3>
+          <p>Contamos con el servicio de laboratorio con equipos de última tecnología y con Certificación ISO 9001:2008 para garantizar la seguridad de los procesos.</p>
+          <a href="servicios.html" class="ver-mas-btn">VER MÁS</a>
+      </div>
+      <div class="servicio">
+          <i class="fas fa-x-ray"></i> <!-- Ícono de Rayos X -->
+          <h3>Rayos X</h3>
+          <p>De gran utilidad para la detección de enfermedades del esqueleto y diagnóstico de tejidos blandos, como edemas pulmonares, neumonía, entre otros.</p>
+          <a href="servicios.html" class="ver-mas-btn">VER MÁS</a>
+      </div>
+      <div class="servicio">
+          <i class="fas fa-procedures"></i> <!-- Ícono de Centro Quirúrgico -->
+          <h3>Centro Quirúrgico</h3>
+          <p>Garantizamos un espacio que proporcione seguridad, confort y eficiencia para todas las actividades del personal médico y del paciente.</p>
+          <a href="servicios.html" class="ver-mas-btn">VER MÁS</a>
+      </div>
+  </div>
+
+</section>
+
+<script>
+  function toggleRegisterOptions() {
+      const options = document.getElementById('register-options');
+      options.style.display = options.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>

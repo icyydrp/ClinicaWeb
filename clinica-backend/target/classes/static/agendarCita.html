@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita</title>
+    <link rel="stylesheet" href="css/agendarCita.css">
+</head>
+
+<body>
+    <div class="container">
+        <button class="btn-regresar" onclick="window.history.back()">← Regresar</button>
+
+        <div class="form-container">
+            <h1>Agendar Cita Médica</h1>
+            <form id="formAgendarCita">
+                <input type="hidden" id="pacienteId" name="pacienteId" value="1"> <!-- Ajusta dinámicamente el valor según el paciente autenticado -->
+            
+                <div class="form-group">
+                    <label for="fecha">Fecha de la cita:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="hora">Hora de la cita:</label>
+                    <input type="time" id="hora" name="hora" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="especialidad">Especialidad:</label>
+                    <select id="especialidad" name="especialidad" required>
+                        <option value="">Seleccione una especialidad</option>
+                        <option value="Cardiología">Cardiología</option>
+                        <option value="Pediatría">Pediatría</option>
+                        <option value="Neurología">Neurología</option>
+                        <option value="Dermatología">Dermatología</option>
+                        <option value="Ginecología">Ginecología</option>
+                        <option value="Urología">Urología</option>
+                        <option value="Endocrinología">Endocrinología</option>
+                        <option value="Traumatología">Traumatología</option>
+                        <option value="Psiquiatría">Psiquiatría</option>
+                        <option value="Oftalmología">Oftalmología</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="medico_id">Seleccionar médico:</label>
+                    <select id="medico_id" name="medico_id" required>
+                        <option value="">Seleccione un médico</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="motivo">Motivo de la cita:</label>
+                    <textarea id="motivo" name="motivo" required></textarea>
+                </div>
+            
+                <button type="submit" class="btn-agendar">Agendar Cita</button>
+            </form>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Cargar los médicos disponibles al seleccionar especialidad
+            document.getElementById('especialidad').addEventListener('change', cargarMedicos);
+
+            // Agregar evento para agendar la cita
+            document.getElementById("formAgendarCita").addEventListener("submit", agendarCita);
+        });
+
+        function cargarMedicos() {
+            const especialidadSeleccionada = document.getElementById('especialidad').value;
+
+            if (!especialidadSeleccionada) {
+                document.getElementById('medico_id').innerHTML = '<option value="">Seleccione un médico</option>';
+                return;
+            }
+
+            fetch(`/api/medicos?especialidad=${especialidadSeleccionada}`)
+                .then(response => response.json())
+                .then(medicos => {
+                    const selectMedico = document.getElementById('medico_id');
+                    selectMedico.innerHTML = '<option value="">Seleccione un médico</option>';
+
+                    medicos.forEach(medico => {
+                        const option = document.createElement('option');
+                        option.value = medico.id;
+                        option.text = `${medico.nombres} ${medico.apellidos}`;
+                        selectMedico.add(option);
+                    });
+                })
+                .catch(error => console.error('Error al cargar los médicos:', error));
+        }
+
+        function agendarCita(event) {
+    event.preventDefault();
+
+    const pacienteId = document.getElementById('pacienteId').value;
+    const data = new FormData(event.target);
+
+    if (!pacienteId) {
+        alert("No se ha identificado al paciente. Inicie sesión nuevamente.");
+        return;
+    }
+
+    fetch('/api/citas/agendar', {
+        method: 'POST',
+        body: data
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al agendar la cita");
+            }
+            return response.text();
+        })
+        .then(message => {
+            alert(message);
+            window.location.href = "/verCitasPaciente.html"; // Redirigir al historial de citas
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Hubo un problema al agendar la cita. Inténtelo de nuevo.");
+        });
+}
+
+    </script>
+</body>
+</html>
