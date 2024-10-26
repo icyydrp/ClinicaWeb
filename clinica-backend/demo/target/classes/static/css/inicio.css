@@ -1,0 +1,408 @@
+* {
+    margin: 0; /* Elimina margen predeterminado */
+    padding: 0; /* Elimina padding predeterminado */
+    box-sizing: border-box; /* Asegura que el padding y borde no afecten al tamaño total del elemento */
+  }
+  
+  body {
+    color: #fff; /* Texto en blanco */
+  }
+  
+  header {
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Distribuye los elementos a lo largo del header */
+  }
+  section {
+    margin: 0;
+    padding: 0;
+  }
+  .container-wrapper {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos (logo, menú, botones) */
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Limita el ancho máximo */
+  }
+  .logo-container {
+    display: flex;
+    align-items: center; /* Alinea el logo verticalmente */
+    height: 70px; /* Aumenta la altura del contenedor */
+    padding: 0; /* Elimina cualquier padding */
+    margin: 0; /* Elimina cualquier margen */
+    width: 240px; /* Aumenta el ancho del contenedor */
+  }
+  
+  .logo img {
+    width: 260px; /* La imagen ocupa el 100% del ancho del contenedor */
+    height: 70px; /* La imagen ocupa el 100% de la altura del contenedor */
+    object-fit: cover; /* Mantiene el logo dentro del contenedor, ajustado completamente */
+    display: block; /* Evita espacios extra como elemento en línea */
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  .menu-container {
+    background-color: rgba(0, 0, 0, 0.295); /* Color de fondo del contenedor */
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 8px 10px; /* Ajusta el espacio interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el contenedor */
+    display: flex; /* Flexbox para centrar los botones */
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Centra los botones verticalmente */
+    height: 58px; /* Altura del contenedor */
+    margin: 0 20px; /* Espaciado entre los otros contenedores */
+  }
+  
+  .nav-menu {
+    list-style: none; /* Elimina el estilo de lista predeterminado */
+    display: flex; /* Flex para los botones del menú */
+    gap: 5px; /* Espaciado entre los botones del menú */
+    justify-content: center; /* Centra los botones */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-menu li {
+    display: inline-block; /* Mantiene los elementos en línea */
+  }
+  
+  .nav-menu a {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: #fff; /* Texto blanco */
+    padding: 12px 16px; /* Padding dentro de los botones */
+    border-radius: 60px; /* Bordes redondeados en los botones */
+    font-family: 'Unbounded', sans-serif; /* Agrega la fuente Unbounded */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 12px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease; /* Efecto de transición en hover */
+    text-align: center; /* Centra el texto dentro del botón */
+    white-space: nowrap; /* Evita que el texto se parta en múltiples líneas */
+  }
+  
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    background-color: #ffffff13; /* Cambia el fondo del botón cuando está activo o en hover */
+    color: #00ffd5; /* Color del texto cuando está activo */
+  }
+  
+  .nav-buttons-container {
+    display: flex; /* Flexbox para los botones */
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    align-items: center; /* Alinea los botones verticalmente */
+    flex-grow: 0; /* No permite que los botones se expandan */
+    gap: 5px; /* Aumenta el espacio entre los botones */
+    padding: 0; /* Elimina cualquier padding */
+  }
+  
+  .nav-buttons {
+    list-style: none; /* Elimina el estilo de lista predeterminado */
+    display: flex; /* Flex para los botones del menú */
+    gap: 5px; /* Aumenta el espacio entre los botones */
+    justify-content: center;
+    align-items: center;
+    margin: 5px; 
+    
+  }
+  .nav-buttons li {
+    display: inline-block;
+  }
+  .nav-buttons a {
+    font-family: 'Unbounded', sans-serif; /* Fuente Unbounded */
+    text-decoration: none; /* Elimina el subrayado */
+    background-color: #27F5E4; /* Color de fondo */
+    color: rgb(0, 0, 0); /* Color del texto */
+    padding: 12px 5px; /* Aumenta el padding para más espacio dentro de los botones */
+    border-radius: 40px; /* Bordes redondeados */
+    font-size: 12px; /* Ajusta el tamaño de la fuente */
+    transition: background-color 0.3s ease; /* Efecto de transición en hover */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    
+  }
+  .nav-buttons a:hover {
+    background-color: #009488; /* Color de fondo más oscuro en hover */
+    color: rgb(255, 255, 255); /* Color del texto */
+  }
+  
+  
+  #register-options {
+    font-size: 15px;
+    font-family: 'italic', sans-serif; /* Fuente */
+    font-weight: bolder; /* Texto en negrita */
+    background-color: rgba(255, 255, 255, 0.568); /* Fondo blanco con transparencia */
+    color: #000000; /* Texto negro */
+    padding: 10px 15px; /* Reduce el padding interno */
+    border-radius: 8px; /* Bordes redondeados */
+    position: absolute; /* Posiciona el contenedor sobre otros elementos */
+    top: 80px; /* Espaciado desde la parte superior */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta el contenedor para estar perfectamente centrado */
+    text-align: center; /* Centra el texto */
+    white-space: nowrap; /* Asegura que el texto dentro del botón no se divida en varias líneas */
+    display: inline-block;
+    max-width: 450px; /* Limita el ancho máximo del contenedor */
+    width: 100%; /* Se ajusta al 100% del ancho del padre, limitado por max-width */
+  }
+  
+  .register-btn {
+    background-color: #27F5E4; /* Fondo de los botones de registro */
+    color: #fff; /* Texto blanco */
+    padding: 10px 25px; /* Espaciado interno */
+    border-radius: 20px; /* Bordes redondeados */
+    margin: 10px 0; /* Margen externo */
+    white-space: nowrap; /* Evita que el texto se parta en múltiples líneas */
+    border: none; /* Elimina el borde del botón */
+    font-size: 14px;
+    font-family: 'Unbounded', sans-serif;
+  }
+  
+  .register-btn:hover {
+    background-color: #009488; /* Cambia el fondo en hover */
+  }
+  
+  /* Estilo para el cierre (la X) como un span */
+  .close-span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .close-span:hover {
+    color: #FF0000; /* Cambia a rojo en hover */
+  }
+  
+  #register-options button {
+    background-color: #01b8a8; /* Fondo verde */
+    color: #fff; /* Texto blanco */
+    padding: 10px 25px; /* Espaciado interno */
+    border-radius: 20px; /* Bordes redondeados */
+    margin: 10px 0; /* Margen externo */
+    white-space: nowrap; /* Evita que el texto se parta en múltiples líneas */
+    border: none; /* Elimina el borde del botón */
+  }
+  
+  #register-options button:hover {
+    background-color: #009488; /* Cambia el fondo en hover */
+  }
+  
+  /* Nueva sección para la imagen completa */
+  .image-section {
+    width: 100%; /* El ancho ocupa todo el espacio disponible */
+    height: 100vh; /* Altura del contenedor igual a la altura de la ventana */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    overflow: hidden; /* Asegura que no haya desbordamiento */
+  }
+  
+  .image-container {
+    margin: 0; /* Asegúrate de que no haya márgenes */
+      padding: 0; /* Asegúrate de que no haya relleno */
+      width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+      height: 100%; /* Asegura que la altura sea automática en función del contenido */
+      overflow: hidden; /* Elimina cualquier posible desbordamiento */
+  }
+  
+  .image-container img {
+    width: 100%; /* La imagen se ajusta al ancho del contenedor */
+    height: 100%; /* La imagen se ajusta al alto del contenedor */
+    object-fit: cover; /* La imagen cubrirá todo el espacio del contenedor sin deformarse */
+    display: block; /* Evita que haya espacios en blanco alrededor de la imagen */
+    margin: 0;
+      padding: 0;
+  
+  }
+  section#servicios {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-image: url('images/fondo 2.jpg'); /* Cambia esto por la ruta de tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsionarse */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Hace que la imagen de fondo esté fija al hacer scroll */
+    min-height: 100vh; /* Asegura que la sección tenga al menos la altura de la ventana */
+    position: relative; /* Mantiene los elementos dentro de la sección en una posición relativa */
+    overflow: hidden; /* Evita desbordamientos del contenido */
+  }
+  
+  /* Sección de los tres contenedores */
+  .contenedor-servicios-1 {
+    display: flex; /* Coloca los elementos uno al lado del otro */
+    justify-content: space-between; /* Espacio entre los dos contenedores */
+    align-items: center; /* Alinea los contenedores verticalmente */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 80px; /* Altura fija del contenedor */
+    padding: 20px;
+    z-index: 2;
+  }
+  /* Estilo del contenedor de texto */
+  .contenedor-texto {
+    width: auto; /* Controla manualmente el ancho del contenedor de texto */
+    height: auto; /* Ajusta la altura automáticamente según el contenido */
+    padding: 10px; /* Espaciado interno para que el texto no esté pegado al borde */
+    margin-left: 40px; /* Aumenta la distancia respecto al borde izquierdo */
+    z-index: 2;
+  }
+  .contenedor-texto h3 {
+    font-family: 'Unbounded', sans-serif; /* Fuente Unbounded */
+    font-size: 35px; /* Tamaño del título */
+    margin: 0; /* Elimina el margen por defecto */
+    font-weight: normal; /* Quita el estilo negrita */
+  }
+  
+  /* Estilo del contenedor del enlace con formato de botón */
+  .contenedor-boton {
+    width: auto; /* Controla manualmente el ancho del contenedor de texto */
+    height: auto; /* Ajusta la altura automáticamente según el contenido */
+    padding: 10px; /* Espaciado interno para que el texto no esté pegado al borde */
+    margin-right: 40px; /* Aumenta la distancia respecto al borde izquierdo */
+    z-index: 2;
+  }
+  
+  .ver-servicios-btn {
+    width: auto; /* Controla manualmente el ancho del contenedor de texto */
+    height: auto;
+    font-family: 'Unbounded', sans-serif; /* Fuente Unbounded */
+    display: inline-block; /* Hace que el enlace se comporte como un botón */
+    background-color: #27F5E4; /* Color del botón */
+    color: #000; /* Color del texto */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 12px; /* Tamaño de fuente */
+    border-radius: 25px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Efecto de transición */
+    
+  }
+  
+  .ver-servicios-btn:hover {
+    background-color: #007c72; /* Color al pasar el mouse por encima */
+    color: rgb(255, 255, 255); /* Color del texto */
+  }
+  
+  /* Estilo del contenedor principal de servicios */
+  .contenedor-servicios-2 {
+      display: grid; /* Utiliza Grid Layout */
+      grid-template-columns: repeat(2, 1fr); /* Crea 2 columnas */
+      gap: 13px 13px; /* 250px de espacio entre filas, 10px de espacio entre columnas */
+      padding: 20px;
+      position: relative;
+      z-index: 2; /* Mantiene el contenido por encima de la imagen */
+      color: white; /* Texto en blanco para que sea visible sobre la imagen */
+      padding: 20px;
+      min-height: auto; /* Permite que la altura de la sección crezca según el contenido */
+  }
+  
+  /* Contenedores en la primera columna alineados a la derecha */
+  .contenedor-servicios-2 .servicio:nth-child(odd) {
+    justify-self: end; /* Alinea los elementos impares (primera columna) a la derecha */
+  }
+  
+  /* Contenedores en la segunda columna alineados a la izquierda */
+  .contenedor-servicios-2 .servicio:nth-child(even) {
+    justify-self: start; /* Alinea los elementos pares (segunda columna) a la izquierda */
+  }
+  
+  /* Estilo para cada contenedor de servicio con altura personalizada */
+  .servicio {
+      width: 90%;
+      background-color: rgba(0, 0, 0, 0.37); /* Fondo con transparencia */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Asegura que el contenido esté espaciado dentro */
+      height: 300px; /* Ajusta la altura aquí */
+      overflow: hidden; /* Evita desbordamiento de contenido */
+    
+  }
+  
+  .servicio i {
+    font-size: 35px; /* Tamaño del ícono */
+    color: #27F5E4; /* Color del ícono */
+    margin-bottom: 10px; /* Espaciado debajo del ícono */
+    display: block; /* Asegura que el ícono esté en su propia línea */
+    text-align: left; /* Centra el ícono */
+  }
+  
+  /* Estilo para el título del servicio */
+  .servicio h3 {
+    font-family: 'Unbounded', sans-serif; /* Fuente Unbounded */
+    font-weight: normal; /* Quita el estilo negrita */
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #ffffff; /* Color del texto */
+  }
+  
+  /* Estilo para el texto descriptivo del servicio */
+  .servicio p {
+    font-size: 15px;
+    font-family: 'Satoshi', sans-serif; /* Usa la fuente Satoshi */
+    font-weight: 200; /* Regular (ajustable según tus necesidades) */
+    color: rgb(211, 211, 211); /* Color blanco */
+    text-align: left; /* Ajusta la alineación si es necesario */
+    line-height: 1.6; /* Ajusta la altura de línea para mejor legibilidad */
+    margin-bottom: 20px; /* Espacio entre párrafos */
+  }
+  
+  /* Estilo para el botón "VER MÁS" */
+  .ver-mas-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ffffff50;
+    color: #000;
+    text-decoration: none;
+    border-radius: 55px;
+    font-size: 10px;
+    font-family: 'Unbounded', sans-serif; /* Estilo de letra añadido */
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Ubica el botón a la derecha */
+  }
+  
+  
+  .ver-mas-btn:hover {
+    background-color: #00000067;
+    color: #ffffff;
+  }
+  
+  /* Responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .contenedor-servicios-2 {
+        grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
+    }
+  }
+  
+  /* Responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .contenedor-servicios-1 {
+        flex-direction: column; /* Cambia a una sola columna en pantallas pequeñas */
+        text-align: center; /* Centra el texto en pantallas pequeñas */
+    }
+  }
+  
+  /* Responsivo para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .menu-container ul {
+      flex-direction: column; /* Organiza los botones en columna en pantallas pequeñas */
+      gap: 10px; /* Espacio entre los botones en pantallas pequeñas */
+    }
+  
+    .nav-container {
+      flex-direction: column; /* Organiza el logo, menú y botones en una sola columna en pantallas pequeñas */
+    }
+  }
