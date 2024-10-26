@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Paciente</title>
+    <link rel="stylesheet" href="css/registroPaciente.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Formulario de registro -->
+        <div class="form-container">
+            <form action="http://localhost:8080/paciente" method="POST">
+                <h1>Registro de Paciente</h1>
+                <span class="custom-span">Completa los datos y Regístrate</span>
+                <div class="input-container">
+                    <input type="text" name="nombres" placeholder="Nombres" required />
+                </div>
+                <div class="input-container">
+                    <input type="text" name="apellidos" placeholder="Apellidos" required />
+                </div>
+                <div class="input-container">
+                    <input type="text" name="celular" placeholder="Celular" required />
+                </div>
+                <div class="input-container">
+                    <input type="text" name="dni" placeholder="DNI" required />
+                </div>
+                <div class="input-container">
+                    <input type="email" name="correo" placeholder="Correo Electrónico" required />
+                </div>
+                <div class="input-container">
+                    <input type="password" name="contraseña" placeholder="Contraseña" required />
+                </div>
+                <div class="input-container">
+                    <input type="password" name="verificarContraseña" placeholder="Verificar Contraseña" required />
+                </div>
+                <button type="submit">Registrarme</button>
+            </form>
+            
+
+            <script>
+                document.getElementById('pacienteForm').addEventListener('submit', function(event) {
+                    const contraseña = document.getElementById('contraseñaPaciente').value;
+                    const verificarContraseña = document.getElementById('verificarContraseñaPaciente').value;
+
+                    // Validación de coincidencia de contraseñas
+                    if (contraseña !== verificarContraseña) {
+                        alert('Las contraseñas no coinciden.');
+                        event.preventDefault(); // Detiene el envío del formulario si no coinciden
+                        return;
+                    }
+                });
+            </script>
+        </div>
+
+        <!-- Contenedor del panel de bienvenida -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Hola, ¡Bienvenido!</h1>
+                    <p>Si ya eres un usuario registrado, inicia sesión haciendo clic en el botón de abajo</p>
+                    <button class="ghost" onclick="window.location.href='login.html'">Iniciar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
