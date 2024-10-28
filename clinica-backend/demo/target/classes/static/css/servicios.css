@@ -1,0 +1,217 @@
+/* Fondo en todo el cuerpo */
+body {
+    background-image: url('images/backgroundblur.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-family: 'Satoshi', sans-serif;
+}
+
+/* Fondo de página */
+.background-fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/backgroundblur.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+/* Banner de servicios */
+.banner-servicios {
+    position: relative;
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    height: 550px;
+    overflow: hidden;
+}
+
+.banner-servicios .banner-image {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-servicios .banner-text {
+    position: absolute;
+    left: 5%;
+    max-width: 500px;
+    font-family: 'Unbounded', sans-serif;
+    color: #000;
+    text-align: left;
+}
+
+.banner-servicios .banner-text h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+.banner-servicios .banner-text p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Estilos de servicios y cuadrícula */
+.servicios {
+    padding: 0 20px; /* Ajusta el padding superior e inferior a 0 */
+    margin-top: -160px; /* Ajuste la posición para que las tarjetas comiencen al final de la imagen */
+    text-align: center;
+    color: #fff;
+    z-index: 1; /* Asegura que las tarjetas estén por encima de cualquier contenido */
+    position: relative;
+}
+
+.grid-servicios {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tarjetas de servicio */
+.servicio-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.servicio-card h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 20px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.servicio-card p {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Estilos para el botón Ver Más */
+.ver-mas-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #27F5E4;
+    color: #000;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.ver-mas-btn:hover {
+    background-color: #009488;
+    color: #fff;
+}
+
+
+/* Estilos del footer */
+.footer {
+    background-color: #050505; /* Color de fondo similar al diseño proporcionado */
+    color: #ffffff; /* Texto en blanco */
+    padding: 40px 0;
+    font-family: 'Satoshi', sans-serif;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    text-align: center;
+    margin: 10px;
+}
+
+.footer-section.left {
+    text-align: left;
+}
+
+.footer-section.right {
+    text-align: right;
+}
+
+.footer-section h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #27F5E4; /* Color de los enlaces */
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #27F5E4;
+}
+
+.footer-bottom {
+    background-color: #121212;
+    padding: 15px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+    }
+}

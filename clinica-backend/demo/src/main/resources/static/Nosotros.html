@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Clínica Señor de Luren</title>
+    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/nosotros.css">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Contenedor de fondo -->
+    <div class="background-fondo"></div>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container-wrapper">
+            <div class="logo-container">
+                <div class="logo">
+                    <a href="paginainicio.html">
+                        <img src="images/logo clinica señor de Luren.png" alt="Logo de la Clínica">
+                    </a>
+                </div>
+            </div>
+            <div class="menu-container">
+                <ul class="nav-menu">
+                    <li><a href="paginainicio.html">INICIO</a></li>
+                    <li><a href="servicios.html">SERVICIOS</a></li>
+                    <li><a href="especialidades.html">ESPECIALIDADES</a></li>
+                    <li><a href="reviews.html">REVIEWS</a></li>
+                    <li><a href="noticias.html">NOTICIAS</a></li>
+                    <li><a href="contactos.html">CONTACTOS</a></li>
+                    <li><a href="agendarCita.html">RESERVAS</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons-container">
+                <ul class="nav-buttons">
+                    <li><a href="login.html">INICIAR SESIÓN</a></li>
+                    <li><a href="#" onclick="toggleRegisterOptions()">REGISTRAR</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner de Nosotros -->
+    <div class="banner-nosotros">
+        <div class="banner-text">
+            <h1>Nosotros</h1>
+        </div>
+    </div>
+
+    <!-- Descripción de la clínica -->
+    <section class="content-wrapper">
+        <div class="descripcion">
+            <h2>Acerca de Nosotros</h2>
+            <p>En Clínica Señor de Luren nos comprometemos a brindar atención médica de calidad, con un enfoque humano y profesional. Nuestro equipo de expertos trabaja cada día para mejorar la salud y el bienestar de nuestros pacientes.</p>
+        </div>
+
+        <!-- Sección de Misión y Visión -->
+        <div class="mision-vision">
+            <div class="mision">
+                <h2>Misión</h2>
+                <p>Nuestra misión es proporcionar servicios de salud integrales con el más alto estándar de calidad y dedicación, buscando siempre el bienestar de nuestros pacientes.</p>
+            </div>
+            <div class="vision">
+                <h2>Visión</h2>
+                <p>Aspiramos a ser un centro médico líder reconocido por su compromiso con la excelencia y la innovación en el cuidado de la salud.</p>
+            </div>
+        </div>
+
+        <!-- Sección de Valores -->
+        <section class="valores">
+            <h2>Valores</h2>
+            <div class="valores-grid">
+                <div class="valor-card">
+                    <h3>Ética</h3>
+                    <p>Ser un modelo de conducta inspirador, cumpliendo con los más altos estándares éticos en todos nuestros servicios.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Confianza</h3>
+                    <p>Inspirar y mantener la confianza de nuestros pacientes mediante prácticas hospitalarias de excelencia.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Veracidad</h3>
+                    <p>Proveer información clara y oportuna, actuando siempre con transparencia.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Seguridad</h3>
+                    <p>Velar por la seguridad y bienestar de nuestros pacientes y el equipo de trabajo.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Respeto</h3>
+                    <p>Escuchar y valorar las opiniones y experiencias de todos, promoviendo un ambiente inclusivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Historia -->
+        <div class="historia">
+            <h2>Nuestra Historia</h2>
+            <p>La Clínica Señor de Luren fue fundada con el propósito de ofrecer servicios de salud de calidad a la comunidad. A lo largo de los años, hemos crecido y evolucionado, incorporando tecnologías avanzadas y un equipo profesional altamente capacitado. Nuestra historia es un testimonio de nuestro compromiso constante con el bienestar de nuestros pacientes.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Sección izquierda -->
+            <div class="footer-section left">
+                <p>Emergencias: 955223631</p>
+                <p>Citas: 955401599</p>
+                <p>Ubicación: Av. San Martín #536</p>
+            </div>
+
+            <!-- Sección central (Logo y redes sociales) -->
+            <div class="footer-section center">
+                <h2>Clínica Señor de Luren</h2>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/ClinicaLuren/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <!-- Agregar otros íconos de redes sociales aquí si es necesario -->
+                </div>
+            </div>
+
+            <!-- Sección derecha -->
+            <div class="footer-section right">
+                <p><a href="mailto:clinica_luren@hotmail.com">Correo: clinica_luren@hotmail.com</a></p>
+                <p>Horarios de Atención: Lunes a Viernes</p>
+                <p>Servicios de Urgencias las 24 horas</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link a Font Awesome para los íconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        function toggleRegisterOptions() {
+            const options = document.getElementById('register-options');
+            options.style.display = options.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
