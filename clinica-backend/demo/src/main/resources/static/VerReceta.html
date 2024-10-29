@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta Médica - Clínica Señor de Luren</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sin-bordes td, .sin-bordes th {
+            border: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="bg-light border-bottom">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="paginaprincipalPaciente.html">
+                    <img src="images/logo clinica señor de Luren.png" alt="Logo" height="50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li><a href="paginaprincipalPaciente.html" class="nav-link active">Inicio</a></li>
+                        <li><a href="verCitasPaciente.html" class="nav-link">Ver Citas</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Receta Médica</h1>
+
+        <div class="table-responsive">
+            <table class="table sin-bordes">
+                <tbody>
+                    <tr class="table-light">
+                        <th colspan="2" class="text-center">INFORMACIÓN DEL MÉDICO</th>
+                    </tr>
+                    <tr>
+                        <td>Nombre del médico: <span id="medicoNombre"></span></td>
+                        <td>Correo electrónico del médico: <span id="medicoCorreo"></span></td>
+                    </tr>
+
+                    <tr class="table-light">
+                        <th colspan="2" class="text-center">INFORMACIÓN PERSONAL DEL PACIENTE</th>
+                    </tr>
+                    <tr>
+                        <td>Nombre completo: <span id="pacienteNombre"></span></td>
+                        <td>Correo electrónico: <span id="pacienteCorreo"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Número de celular: <span id="pacienteCelular"></span></td>
+                    </tr>
+
+                    <tr class="table-light">
+                        <th colspan="2" class="text-center">RECETA</th>
+                    </tr>
+                    <tr>
+                        <td>Medicamentos: <span id="recetaMedicamentos"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Dosis: <span id="recetaDosis"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Frecuencia y duración: <span id="recetaFrecuencia"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Instrucciones: <span id="recetaInstrucciones"></span></td>
+                    </tr>
+
+                    <tr class="table-light">
+                        <th colspan="2" class="text-center">NOTAS ADICIONALES</th>
+                    </tr>
+                    <tr>
+                        <td><span id="notaAdicional"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="text-end">
+                            <strong>Fecha de Emisión:</strong> <span id="fechaEmision"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <button id="btnDescargar" class="btn btn-primary me-2">Descargar PDF</button>
+            <button class="btn btn-secondary" onclick="volverPaginaAnterior()">Regresar</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <!-- JavaScript para cargar la receta -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pacienteId = urlParams.get('pacienteId');
+
+            if (pacienteId) {
+                await cargarReceta(pacienteId);
+            } else {
+                alert('No se encontró el ID del paciente.');
+            }
+
+            document.getElementById('btnDescargar').addEventListener('click', descargarPDF);
+        });
+
+        async function cargarReceta(pacienteId) {
+            try {
+                const response = await fetch(`/api/paciente/${pacienteId}/recetas`);
+                if (!response.ok) throw new Error('No se encontraron recetas.');
+
+                const recetas = await response.json();
+                if (recetas.length > 0) {
+                    mostrarReceta(recetas[0]);
+                } else {
+                    alert('No hay recetas para este paciente.');
+                }
+            } catch (error) {
+                console.error('Error al cargar la receta:', error);
+                alert('Error al cargar la receta.');
+            }
+        }
+
+        function mostrarReceta(receta) {
+            document.getElementById('medicoNombre').textContent = receta.medicoNombre || 'N/A';
+            document.getElementById('medicoCorreo').textContent = receta.medicoCorreo || 'N/A';
+
+            document.getElementById('pacienteNombre').textContent = receta.pacienteNombre || 'N/A';
+            document.getElementById('pacienteCorreo').textContent = receta.pacienteCorreo || 'N/A';
+            document.getElementById('pacienteCelular').textContent = receta.pacienteCelular || 'N/A';
+
+            document.getElementById('recetaMedicamentos').textContent = receta.medicamentos || 'N/A';
+            document.getElementById('recetaDosis').textContent = receta.dosis || 'N/A';
+            document.getElementById('recetaFrecuencia').textContent = receta.frecuencia || 'N/A';
+            document.getElementById('recetaInstrucciones').textContent = receta.instrucciones || 'N/A';
+            document.getElementById('notaAdicional').textContent = receta.notaAdicional || 'N/A';
+            document.getElementById('fechaEmision').textContent = receta.fechaEmision || 'N/A';
+        }
+
+        function descargarPDF() {
+            const recetaContent = document.querySelector('.table-responsive');
+            const opt = {
+                margin: 0.5,
+                filename: 'Receta_Medica.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(recetaContent).save();
+        }
+
+        function volverPaginaAnterior() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

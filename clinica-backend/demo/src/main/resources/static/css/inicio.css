@@ -228,7 +228,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    background-image: url('images/fondo 2.jpg'); /* Cambia esto por la ruta de tu imagen */
+    background-image: url('https://www.goodhope.org.pe/wp-content/uploads/2018/10/19-1024x388.jpg'); /* Cambia esto por la ruta de tu imagen */
     background-size: cover; /* Asegura que la imagen cubra todo el contenedor sin distorsionarse */
     background-position: center; /* Centra la imagen en el contenedor */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -395,8 +395,6 @@
     }
   }
   
-  
-
   /* Responsivo para pantallas pequeñas */
   @media (max-width: 768px) {
     .menu-container ul {

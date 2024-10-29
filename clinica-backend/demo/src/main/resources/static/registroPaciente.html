@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Formulario de registro -->
         <div class="form-container">
-            <form action="http://localhost:8080/paciente" method="POST">
+            <form id="pacienteForm" action="http://localhost:8080/paciente" method="POST">
                 <h1>Registro de Paciente</h1>
                 <span class="custom-span">Completa los datos y Regístrate</span>
                 <div class="input-container">
@@ -29,28 +29,17 @@
                     <input type="email" name="correo" placeholder="Correo Electrónico" required />
                 </div>
                 <div class="input-container">
-                    <input type="password" name="contraseña" placeholder="Contraseña" required />
+                    <input type="password" id="contraseñaPaciente" name="contraseña" placeholder="Contraseña" required />
+                    <!-- Mensaje de validación de la contraseña -->
+                    <small id="passwordRequirements" style="color: gray; display: block;">
+                        La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.
+                    </small>
                 </div>
                 <div class="input-container">
-                    <input type="password" name="verificarContraseña" placeholder="Verificar Contraseña" required />
+                    <input type="password" id="verificarContraseñaPaciente" name="verificarContraseña" placeholder="Verificar Contraseña" required />
                 </div>
                 <button type="submit">Registrarme</button>
             </form>
-            
-
-            <script>
-                document.getElementById('pacienteForm').addEventListener('submit', function(event) {
-                    const contraseña = document.getElementById('contraseñaPaciente').value;
-                    const verificarContraseña = document.getElementById('verificarContraseñaPaciente').value;
-
-                    // Validación de coincidencia de contraseñas
-                    if (contraseña !== verificarContraseña) {
-                        alert('Las contraseñas no coinciden.');
-                        event.preventDefault(); // Detiene el envío del formulario si no coinciden
-                        return;
-                    }
-                });
-            </script>
         </div>
 
         <!-- Contenedor del panel de bienvenida -->
@@ -64,5 +53,49 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('pacienteForm').addEventListener('submit', function(event) {
+            const contraseña = document.getElementById('contraseñaPaciente').value;
+            const verificarContraseña = document.getElementById('verificarContraseñaPaciente').value;
+            const passwordRequirements = document.getElementById('passwordRequirements');
+
+            // Expresión regular para verificar que la contraseña sea segura
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Validación de la seguridad de la contraseña
+            if (!passwordRegex.test(contraseña)) {
+                passwordRequirements.style.color = 'red';
+                passwordRequirements.textContent = 'La contraseña no cumple con los requisitos. Debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.';
+                event.preventDefault(); // Detiene el envío del formulario si no cumple
+                return;
+            } else {
+                passwordRequirements.style.color = 'green';
+                passwordRequirements.textContent = 'La contraseña cumple con los requisitos.';
+            }
+
+            // Validación de coincidencia de contraseñas
+            if (contraseña !== verificarContraseña) {
+                alert('Las contraseñas no coinciden.');
+                event.preventDefault(); // Detiene el envío del formulario si no coinciden
+                return;
+            }
+        });
+
+        // Mostrar requisitos de la contraseña al usuario mientras escribe
+        document.getElementById('contraseñaPaciente').addEventListener('input', function() {
+            const contraseña = this.value;
+            const passwordRequirements = document.getElementById('passwordRequirements');
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(ñ?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (passwordRegex.test(contraseña)) {
+                passwordRequirements.style.color = 'green';
+                passwordRequirements.textContent = 'La contraseña cumple con los requisitos.';
+            } else {
+                passwordRequirements.style.color = 'gray';
+                passwordRequirements.textContent = 'La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.';
+            }
+        });
+    </script>
 </body>
 </html>
