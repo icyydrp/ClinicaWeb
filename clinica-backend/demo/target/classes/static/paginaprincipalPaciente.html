@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Inicio - Clínica Señor de Luren</title>
     <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
       <div class="container-wrapper">
           <div class="logo-container">
               <div class="logo">
-                  <a href="acerdaDe.html">
+                  <a href="Nosotros.html">
                       <img src="images/logo clinica señor de Luren.png" alt="Logo de la Clínica">
                   </a>
               </div>
@@ -26,7 +27,6 @@
                 <li><a href="servicios.html">SERVICIOS</a></li>
                 <li><a href="especialidades.html">ESPECIALIDADES</a></li>
                 <li><a href="reviews.html">REVIEWS</a></li>
-                <li><a href="noticias.html">NOTICIAS</a></li>
                 <li><a href="contactos.html">CONTACTOS</a></li>
                 <li><a href="agendarCita.html">RESERVAR CITAS</a></li>
                 <li><a href="verCitasPaciente.html">VER CITAS</a></li>
@@ -88,16 +88,25 @@
       </div>
   </div>
 
+  <!-- Contenedor del chatbot -->
+<div id="chatbot-container">
+    <div id="chatbot-header">
+        Chat de Salud
+        <button id="chatbot-close-btn">&times;</button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Escribe tu mensaje aquí...">
+        <button id="chatbot-send-btn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<!-- Botón flotante para abrir/cerrar el chatbot -->
+<button id="chatbot-toggle-btn"><i class="fas fa-comment"></i></button>
+
 </section>
+<script src="js/chatbot.js"></script>
 
-<script>
-        function cerrarSesion() {
-    fetch('/logout', { method: 'GET' })
-        .then(() => window.location.href = "/paginainicio.html")
-        .catch(error => console.error('Error al cerrar sesión:', error));
-}
-
-</script>
 
 
 

@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url('fondoContactos.jpg'); /* Cambia 'ruta/de/tu/imagen.jpg' por la ruta de tu imagen */
+  background-image: url('https://www.lavanguardia.com/andro4all/hero/2023/10/foto-de-perfil-whatsapp.jpg?width=1200'); /* Cambia 'ruta/de/tu/imagen.jpg' por la ruta de tu imagen */
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Esto hace que la imagen de fondo esté fija */

@@ -46,42 +46,69 @@ async function obtenerIdPaciente() {
     }
 }
 
-// **Cargar citas del paciente**
+
+
+// **Mostrar citas**
+// **Mostrar citas**
 async function cargarCitas() {
     try {
-        const pacienteId = await obtenerIdPaciente();
+        const pacienteId = await obtenerIdPaciente(); // Asegúrate que esta función obtenga el ID correcto
+        console.log('Paciente ID obtenido:', pacienteId); // Log para verificar
+
         const response = await fetch(`/api/citas/paciente/${pacienteId}`);
         if (!response.ok) throw new Error('Error al obtener las citas.');
+
         const citas = await response.json();
-        console.log('Citas recibidas:', citas);
-        mostrarCitas(citas);
+        console.log('Citas recibidas:', citas); // Log para verificar las citas recibidas
+
+        mostrarCitas(citas); // Mostrar las citas
     } catch (error) {
         console.error('Error al cargar las citas:', error);
         alert('No se pudieron cargar las citas.');
     }
 }
 
-// **Mostrar citas**
+// Mostrar las citas en la lista
 function mostrarCitas(citas) {
     const listaCitas = document.getElementById('listaCitas');
-    listaCitas.innerHTML = '';
+    listaCitas.innerHTML = ''; // Limpiar la lista antes de renderizar
+
+    if (citas.length === 0) {
+        listaCitas.innerHTML = '<p class="text-center text-muted">No hay citas disponibles.</p>';
+        return;
+    }
+
     citas.forEach(cita => {
-        const medico = cita.medico ? `${cita.medico.nombres} ${cita.medico.apellidos}` : 'Médico no asignado';
+        const medico = cita.medico 
+            ? `${cita.medico.nombres} ${cita.medico.apellidos}` 
+            : 'Médico no asignado';
         const fecha = new Date(cita.fecha).toLocaleDateString('es-PE');
         const hora = cita.hora || 'Hora no especificada';
         const motivo = cita.motivo || 'Sin motivo especificado';
         const comentario = cita.comentario || 'Sin comentario disponible';
         const estado = cita.estado || 'Pendiente';
 
+        // Verificar si el objeto paciente existe
+        const pacienteId = cita.paciente ? cita.paciente.id : null;
+
         let botones = '';
+
+        // Mostrar los botones de modificar y cancelar si la cita está pendiente
         if (estado.toLowerCase() === 'pendiente') {
             botones = `
-                <button class="btn btn-warning me-2" onclick="abrirModalModificar(${cita.id}, '${motivo}', '${cita.fecha}', '${cita.hora}')">
+                <button class="btn btn-warning me-2" 
+                        onclick="abrirModalModificar(${cita.id}, '${motivo}', '${cita.fecha}', '${cita.hora}')">
                     Modificar
                 </button>
                 <button class="btn btn-danger" onclick="cancelarCita(${cita.id})">Cancelar</button>`;
         }
 
+        // Botón para ver la receta si la cita está aceptada y tiene un paciente
+        const botonReceta = (estado.toLowerCase() === 'aceptada' && pacienteId)
+            ? `<button class="btn btn-primary mt-2" onclick="verReceta(${pacienteId})">Ver Receta</button>`
+            : '';
+
+        // Generar el contenido HTML para la cita
         listaCitas.innerHTML += `
             <div class="list-group-item mb-3">
                 <p><strong>Fecha:</strong> ${fecha}</p>
@@ -93,9 +120,11 @@ function mostrarCitas(citas) {
                 <p><strong>Estado:</strong> ${estado}</p>
                 ${botones}
                 <button class="btn btn-primary mt-2" onclick="abrirChat(${cita.id})">Abrir Chat</button>
+                ${botonReceta}
             </div>`;
     });
 }
+
 
 // **Abrir chat**
 function abrirChat(citaId) {
@@ -256,6 +285,12 @@ function actualizarContadorNotificaciones(cantidad) {
             window.location.href = "/login.html";
         }
     }
+
+    function verReceta(pacienteId) {
+        window.location.href = `VerReceta.html?pacienteId=${pacienteId}`;
+    }
+    
+    
     
     
 

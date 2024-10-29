@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,54 +10,73 @@
     <div class="container">
         <!-- Formulario de registro de médico -->
         <div class="form-container">
-            <form action="http://localhost:8080/medico" method="POST">
+            <form id="medicoForm" action="http://localhost:8080/medico/registrar" method="POST">
                 <h1>Registro de Médico</h1>
-                <span class="custom-span">Completa los datos y Registrate como Médico</span>
                 <div class="input-container">
-                    <input type="text" id="nombres" name="nombres" placeholder="Nombres" required>
-                    <label for="nombres"></label>
+                    <input type="text" name="nombres" placeholder="Nombres" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required>
-                    <label for="apellidos"></label>
+                    <input type="text" name="apellidos" placeholder="Apellidos" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="numero_colegiatura" name="numero_colegiatura" placeholder="Número de Colegiatura" required>
-                    <label for="numero_colegiatura"></label>
+                    <input type="text" name="numero_colegiatura" placeholder="Número de Colegiatura" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="dniMedico" name="dni" placeholder="DNI" required>
-                    <label for="dniMedico"></label>
+                    <input type="text" name="dni" placeholder="DNI" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="especialidad" name="especialidad" placeholder="Especialidad" required>
-                    <label for="especialidad"></label>
+                    <input type="text" name="especialidad" placeholder="Especialidad" required />
                 </div>
                 <div class="input-container">
-                    <input type="email" id="correoMedico" name="correo" placeholder="Correo Electrónico" required>
-                    <label for="correoMedico"></label>
+                    <input type="email" name="correo" placeholder="Correo Electrónico" required />
                 </div>
                 <div class="input-container">
-                    <input type="password" id="contraseñaMedico" name="contraseña" placeholder="Contraseña" required>
-                    <label for="contraseñaMedico"></label>
+                    <input type="password" id="contraseñaMedico" name="contraseña" placeholder="Contraseña" required />
+                    <small id="mensajeContraseña" style="color: red; display: none;">
+                        La contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un símbolo.
+                    </small>
                 </div>
                 <div class="input-container">
-                    <input type="password" id="verificarContraseñaMedico" name="verificarContraseña" placeholder="Verificar Contraseña" required>
-                    <label for="verificarContraseñaMedico"></label>
+                    <input type="password" id="verificarContraseñaMedico" name="verificarContraseña" placeholder="Verificar Contraseña" required />
+                    <small id="mensajeCoincidencia" style="color: red; display: none;">
+                        Las contraseñas no coinciden.
+                    </small>
                 </div>
                 <button type="submit">Registrarme</button>
             </form>
+            
             <script>
-                document.querySelector('form').addEventListener('submit', function(event) {
+                document.getElementById('medicoForm').addEventListener('submit', function(event) {
                     const contraseña = document.getElementById('contraseñaMedico').value;
                     const verificarContraseña = document.getElementById('verificarContraseñaMedico').value;
-            
+
+                    // Expresión regular para validar la contraseña segura
+                    const contraseñaSegura = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+                    
+                    let esValida = true;
+
+                    // Validar si la contraseña cumple con los requisitos de seguridad
+                    if (!contraseñaSegura.test(contraseña)) {
+                        document.getElementById('mensajeContraseña').style.display = 'block';
+                        esValida = false;
+                    } else {
+                        document.getElementById('mensajeContraseña').style.display = 'none';
+                    }
+
+                    // Validar si ambas contraseñas coinciden
                     if (contraseña !== verificarContraseña) {
-                        alert('Las contraseñas no coinciden.');
-                        event.preventDefault(); // Evita el envío del formulario si las contraseñas no coinciden
+                        document.getElementById('mensajeCoincidencia').style.display = 'block';
+                        esValida = false;
+                    } else {
+                        document.getElementById('mensajeCoincidencia').style.display = 'none';
+                    }
+
+                    // Prevenir el envío del formulario si hay errores
+                    if (!esValida) {
+                        event.preventDefault();
                     }
                 });
-                </script>
+            </script>
         </div>
 
         <!-- Contenedor del panel de bienvenida -->
@@ -73,7 +90,5 @@
             </div>
         </div>
     </div>
-   
-    
 </body>
 </html>

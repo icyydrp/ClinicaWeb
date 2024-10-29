@@ -29,7 +29,8 @@ function cargarMedicos() {
         return;
     }
 
-    fetch(`/api/medicos?especialidad=${especialidadSeleccionada}`)
+    // Llamada al endpoint correcto para obtener los médicos por especialidad
+    fetch(`/api/medicos/especialidad?especialidad=${especialidadSeleccionada}`)
         .then(response => response.json())
         .then(medicos => {
             const selectMedico = document.getElementById('medico_id');
@@ -44,6 +45,8 @@ function cargarMedicos() {
         })
         .catch(error => console.error('Error al cargar los médicos:', error));
 }
+
+
 
 // Agendar una cita
 async function agendarCita(event) {

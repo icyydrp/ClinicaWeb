@@ -18,7 +18,7 @@
         <div class="container-wrapper">
             <div class="logo-container">
                 <div class="logo">
-                    <a href="paginainicio.html">
+                    <a href="Nosotros.html">
                         <img src="images/logo clinica señor de Luren.png" alt="Logo de la Clínica">
                     </a>
                 </div>
@@ -29,26 +29,14 @@
                     <li><a href="servicios.html" class="active">SERVICIOS</a></li>
                     <li><a href="especialidades.html">ESPECIALIDADES</a></li>
                     <li><a href="reviews.html">REVIEWS</a></li>
-                    <li><a href="noticias.html">NOTICIAS</a></li>
                     <li><a href="contactos.html">CONTACTOS</a></li>
                     <li><a href="agendarCita.html">RESERVAS</a></li>
                 </ul>
             </div>
-            <div class="nav-buttons-container">
-                <ul class="nav-buttons">
-                    <li><a href="login.html">INICIAR SESIÓN</a></li>
-                    <li><a href="#" onclick="toggleRegisterOptions()">REGISTRAR</a></li>
-                </ul>
-            </div>
+           
         </div>
     </header>
 
-    <div id="register-options" style="display: none; text-align: center; margin-top: 80px;">
-        <p>Elija una opción para registrarse</p>
-        <button onclick="window.location.href='registroPaciente.html'">Registrar como Paciente</button>
-        <button onclick="window.location.href='registroMedico.html'">Registrar como Médico</button>
-        <span class="close-span" onclick="toggleRegisterOptions()">&#x2716;</span>
-    </div>
 
     <!-- Imagen con texto debajo del navbar -->
     <div class="banner-servicios">
@@ -128,11 +116,6 @@
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 
-    <script>
-        function toggleRegisterOptions() {
-            const options = document.getElementById('register-options');
-            options.style.display = options.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
+ 
 </body>
 </html>

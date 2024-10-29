@@ -26,7 +26,7 @@ async function verificarSesionMedico() {
 
 // Cargar las citas del médico autenticado
 async function cargarCitas() {
-    const medicoId = sessionStorage.getItem('medicoId');  // Recuperar el ID desde sessionStorage
+    const medicoId = sessionStorage.getItem('medicoId');
     console.log("Cargando citas para el médico ID:", medicoId);
 
     try {
@@ -39,7 +39,7 @@ async function cargarCitas() {
         if (citas.length === 0) {
             document.getElementById('citas-lista').innerHTML = '<p>No hay citas disponibles.</p>';
         } else {
-            mostrarCitas(citas);  // Llamar sin pasar explicitamente el medicoId
+            mostrarCitas(citas);
         }
     } catch (error) {
         console.error('Error al cargar las citas:', error);
@@ -48,9 +48,9 @@ async function cargarCitas() {
 
 function mostrarCitas(citas) {
     const listaCitas = document.getElementById('citas-lista');
-    listaCitas.innerHTML = ''; // Limpiar la lista de citas
+    listaCitas.innerHTML = '';
 
-    const medicoId = sessionStorage.getItem('medicoId');  // Recuperar el ID del médico
+    const medicoId = sessionStorage.getItem('medicoId');
 
     citas.forEach(cita => {
         const paciente = cita.paciente || {};
@@ -84,26 +84,38 @@ function mostrarCitas(citas) {
                         onclick="abrirChat(${paciente.id})">Chat con Paciente</button>
             </div>`;
 
-        if (estado.toLowerCase() === 'aceptada') {
-            const footer = document.createElement('div');
-            footer.className = 'card-footer text-end';
+        const footer = document.createElement('div');
+        footer.className = 'card-footer text-end';
 
+        if (estado.toLowerCase() === 'pendiente') {
+            const botonAceptar = document.createElement('button');
+            botonAceptar.className = 'btn btn-success me-2';
+            botonAceptar.textContent = 'Aceptar Cita';
+            botonAceptar.addEventListener('click', () => aceptarCita(cita.id));
+            footer.appendChild(botonAceptar);
+
+            const botonCancelar = document.createElement('button');
+            botonCancelar.className = 'btn btn-danger me-2';
+            botonCancelar.textContent = 'Cancelar Cita';
+            botonCancelar.addEventListener('click', () => cancelarCita(cita.id));
+            footer.appendChild(botonCancelar);
+        }
+
+        if (estado.toLowerCase() === 'aceptada') {
             const botonReceta = document.createElement('button');
             botonReceta.className = 'btn btn-primary me-2';
             botonReceta.textContent = 'Realizar Receta';
-
-            botonReceta.addEventListener('click', () => {
-                console.log('Realizar receta con:', { citaId: cita.id, pacienteId: paciente.id, medicoId });
-                realizarReceta(cita.id, paciente.id, medicoId);
-            });
-
+            botonReceta.addEventListener('click', () =>
+                realizarReceta(cita.id, paciente.id, medicoId)
+            );
             footer.appendChild(botonReceta);
-            card.appendChild(footer);
         }
 
+        card.appendChild(footer);
         listaCitas.appendChild(card);
     });
 }
+
 
 function realizarReceta(citaId, pacienteId, medicoId) {
     if (!citaId || !pacienteId || !medicoId) {
