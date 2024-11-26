@@ -1,56 +1,66 @@
 package clinica_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
+import java.sql.Timestamp;
 
-import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "reviews")
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_paciente", nullable = false)
     private String nombrePaciente;
-
-    @Column(name = "nombre_doctor", nullable = false)
-    private String nombreDoctor;
-
-    @Column(nullable = false)
-    private String especialidad;
-
     private int calificacion;
     private String comentario;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime fecha;
+    @CreationTimestamp
+    private Timestamp fecha;
 
-    public Review() {
-        this.fecha = LocalDateTime.now();
+    // Getters y setters
+    public Long getId() {
+        return id;
     }
 
-    // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getNombrePaciente() { return nombrePaciente; }
-    public void setNombrePaciente(String nombrePaciente) { this.nombrePaciente = nombrePaciente; }
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
 
-    public String getNombreDoctor() { return nombreDoctor; }
-    public void setNombreDoctor(String nombreDoctor) { this.nombreDoctor = nombreDoctor; }
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
+    }
 
-    public String getEspecialidad() { return especialidad; }
-    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+    public int getCalificacion() {
+        return calificacion;
+    }
 
-    public int getCalificacion() { return calificacion; }
-    public void setCalificacion(int calificacion) { this.calificacion = calificacion; }
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
 
-    public String getComentario() { return comentario; }
-    public void setComentario(String comentario) { this.comentario = comentario; }
+    public String getComentario() {
+        return comentario;
+    }
 
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
 }

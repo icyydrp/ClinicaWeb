@@ -1,31 +1,39 @@
 package clinica_backend.controllers;
 
-import java.sql.Date;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.crypto.spec.SecretKeySpec;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import clinica_backend.models.Cita;
 import clinica_backend.models.Medico;
 import clinica_backend.repositories.CitaRepository;
 import clinica_backend.repositories.MedicoRepository;
-import jakarta.servlet.http.HttpSession;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * Controlador para gestionar las acciones relacionadas con los médicos.
  */
-@Controller // Permitir redirecciones y controladores
+@RestController
 @RequestMapping("/medico")
 public class MedicoController {
 
@@ -35,86 +43,53 @@ public class MedicoController {
     @Autowired
     private CitaRepository citaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Value("${jwt.secret}")
+    private String secret;
+
     /**
-     * Registra un nuevo médico y lo guarda en la sesión.
+     * Registra un nuevo médico y devuelve un token JWT y la URL de redirección.
      *
-     * @param nombres            Nombres del médico.
-     * @param apellidos          Apellidos del médico.
-     * @param correo             Correo electrónico del médico.
-     * @param contraseña         Contraseña del médico.
-     * @param numeroColegiatura  Número de colegiatura del médico.
-     * @param especialidad       Especialidad médica del médico.
-     * @param dni                DNI del médico.
-     * @param session            Objeto HttpSession para gestionar la sesión del usuario.
-     * @return Redirige a la página principal del médico o al registro en caso de error.
+     * @param medico Datos del médico a registrar.
+     * @return Token JWT y URL de redirección si el registro es exitoso, o un mensaje de error en caso de fallo.
      */
-    @PostMapping(value = "/registrar", consumes = "application/x-www-form-urlencoded")
-    public String registrarMedico(
-            @RequestParam("nombres") String nombres,
-            @RequestParam("apellidos") String apellidos,
-            @RequestParam("correo") String correo,
-            @RequestParam("contraseña") String contraseña,
-            @RequestParam("numero_colegiatura") String numeroColegiatura,
-            @RequestParam("especialidad") String especialidad,
-            @RequestParam("dni") String dni,
-            HttpSession session) {
-
+    @PostMapping(value = "/registrar", consumes = "application/json")
+    public ResponseEntity<Map<String, String>> registrarMedico(@RequestBody Medico medico) {
         try {
-            // Crear una instancia de Medico y establecer sus propiedades
-            Medico medico = new Medico();
-            medico.setNombres(nombres);
-            medico.setApellidos(apellidos);
-            medico.setCorreo(correo);
-            medico.setContraseña(contraseña);
-            medico.setNumeroColegiatura(numeroColegiatura);
-            medico.setEspecialidad(especialidad);
-            medico.setDni(dni);
+            // Verificar si el correo ya está registrado
+            if (medicoRepository.findByCorreo(medico.getCorreo()).isPresent()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Collections.singletonMap("error", "El correo ya está registrado. Intenta con otro."));
+            }
 
-            // Guardar en la base de datos
+            // Cifrar la contraseña antes de guardarla
+            medico.setContraseña(passwordEncoder.encode(medico.getContraseña()));
+
+            // Guardar el médico en la base de datos
             medicoRepository.save(medico);
 
-            // Guardar en la sesión del usuario
-            session.setAttribute("medico", medico);
+            // Generar un token JWT
+            Key key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
+            String token = Jwts.builder()
+                    .setSubject(medico.getCorreo())
+                    .claim("rol", "MEDICO") // Agregar el rol al JWT
+                    .setIssuedAt(new Date()) // Ajuste aquí a java.util.Date
+                    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
+                    .signWith(key, SignatureAlgorithm.HS256)
+                    .compact();
 
-            // Redirigir a la página principal del médico
-            return "redirect:/paginaprincipalMedico.html";
+            // Crear un mapa con el token y la URL de redirección
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            response.put("redirectUrl", "/paginaprincipalMedico.html");
+
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // Redirigir al formulario de registro con un mensaje de error
-            return "redirect:/registroMedico.html?error=true";
+            e.printStackTrace(); // Añadir para debug
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Error en el registro del médico: " + e.getMessage()));
         }
-    }
-
-    /**
-     * Obtiene los datos del médico desde la sesión del usuario.
-     *
-     * @param session Objeto HttpSession para acceder a la sesión del usuario.
-     * @return ResponseEntity con los datos del médico o un mensaje de error si no se encuentra.
-     */
-    @GetMapping("/medico")
-    public ResponseEntity<Map<String, Object>> obtenerDatosMedico(HttpSession session) {
-        Long id = (Long) session.getAttribute("medicoId");
-
-        if (id == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("success", false, "message", "Sesión no encontrada"));
-        }
-
-        Optional<Medico> medicoOpt = medicoRepository.findById(id);
-        if (medicoOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("success", false, "message", "Médico no encontrado"));
-        }
-
-        Medico medico = medicoOpt.get();
-        Map<String, Object> response = new HashMap<>();
-        response.put("nombres", medico.getNombres());
-        response.put("apellidos", medico.getApellidos());
-        response.put("correo", medico.getCorreo());
-        response.put("dni", medico.getDni());
-        response.put("especialidad", medico.getEspecialidad());
-        response.put("numero_colegiatura", medico.getNumeroColegiatura());
-
-        return ResponseEntity.ok(response);
     }
 
     /**
@@ -130,59 +105,15 @@ public class MedicoController {
     }
 
     /**
-     * Obtiene los datos del médico desde la sesión del usuario.
+     * Obtiene los datos del médico autenticado a través de su correo.
      *
-     * @param session Objeto HttpSession para acceder a la sesión del usuario.
-     * @return ResponseEntity con los datos del médico o un mensaje de error si no se encuentra.
+     * @param correo El correo del médico.
+     * @return ResponseEntity con el objeto Medico si existe.
      */
-    @GetMapping("/sesion/medico")
-    public ResponseEntity<Map<String, Object>> obtenerSesionMedico(HttpSession session) {
-        Long medicoId = (Long) session.getAttribute("medicoId");
-
-        if (medicoId == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("success", false, "message", "Sesión no encontrada"));
-        }
-
-        Optional<Medico> medicoOpt = medicoRepository.findById(medicoId);
-
-        if (medicoOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("success", false, "message", "Médico no encontrado"));
-        }
-
-        Medico medico = medicoOpt.get();
-        Map<String, Object> response = new HashMap<>();
-        response.put("medicoId", medico.getId());
-        response.put("nombres", medico.getNombres());
-        response.put("apellidos", medico.getApellidos());
-
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Método auxiliar para convertir una cadena de texto en una fecha.
-     *
-     * @param fecha Cadena de texto que representa la fecha.
-     * @return Objeto Date correspondiente a la fecha o null si el formato es incorrecto.
-     */
-    private Date convertirFecha(String fecha) {
-        try {
-            return (fecha != null && !fecha.isEmpty()) ? Date.valueOf(fecha) : null;
-        } catch (IllegalArgumentException e) {
-            System.err.println("Formato de fecha incorrecto: " + fecha);
-            return null;
-        }
-    }
-
-    /**
-     * Obtiene la información del médico en sesión desde el objeto HttpSession.
-     *
-     * @param session Objeto HttpSession para acceder a la sesión del usuario.
-     * @return Optional con el objeto Medico si se encuentra en la sesión.
-     */
-    @RequestMapping("/sesion")
-    public Optional<Medico> obtenerMedicoSesion(HttpSession session) {
-        return Optional.ofNullable((Medico) session.getAttribute("medico"));
+    @GetMapping("/datos/{correo}")
+    public ResponseEntity<Medico> obtenerMedicoPorCorreo(@PathVariable String correo) {
+        Optional<Medico> medicoOpt = medicoRepository.findByCorreo(correo);
+        return medicoOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

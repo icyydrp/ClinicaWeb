@@ -3,145 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reseñas de Pacientes - Clínica Señor de Luren</title>
+    <title>Reseñas de Pacientes - Clínica San Vicente</title>
     <link rel="stylesheet" href="css/reviews.css">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="logo">
-            <a href="Nosotros.html">
-                <img src="images/logo clinica señor de Luren.png" alt="Logo de la Clínica">
-            </a>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="paginainicio.html">INICIO</a></li>
-            <li><a href="servicios.html">SERVICIOS</a></li>
-            <li><a href="especialidades.html">ESPECIALIDADES</a></li>
-            <li><a href="reviews.html" class="active">REVIEWS</a></li>
-            <li><a href="noticias.html">NOTICIAS</a></li>
-            <li><a href="contactos.html">CONTACTOS</a></li>
-            <li><a href="agendarCita.html">RESERVAS</a></li>
-        </ul>
-    </header>
-
-    <section class="review-section">
-        <div class="review-container">
-            <!-- Formulario a la izquierda -->
-            <div class="review-form-container">
-                <h2>Escribe una Reseña</h2>
-                <form id="review-form" class="review-form">
-                    <input 
-                        type="text" 
-                        id="review-name" 
-                        name="nombrePaciente" 
-                        placeholder="Tu nombre" 
-                        required
-                    >
-                
-                    <select id="doctor-select" name="nombreDoctor" required>
-                        <option value="" disabled selected>Seleccione un doctor</option>
-                        <option value="Bregu Sarmiento Cielo">Bregu Sarmiento Cielo</option>
-                        <option value="Alvarez Taboada">Alvarez Taboada</option>
-                        <option value="Anchante Gongora Norma Elizabeth">Anchante Gongora Norma Elizabeth</option>
-                        <!-- Más opciones... -->
-                    </select>
-                
-                    <select id="specialty-select" name="especialidad" required>
-                        <option value="" disabled selected>Seleccione una especialidad</option>
-                        <option value="Cardiología">Cardiología</option>
-                        <option value="Neurología">Neurología</option>
-                        <option value="Oftalmología">Oftalmología</option>
-                        <option value="Dermatología">Dermatología</option>
-                        <!-- Más especialidades... -->
-                    </select>
-                
-                    <select id="review-rating" name="calificacion" required>
-                        <option value="5">5 - Excelente</option>
-                        <option value="4">4 - Muy bueno</option>
-                        <option value="3">3 - Bueno</option>
-                        <option value="2">2 - Regular</option>
-                        <option value="1">1 - Malo</option>
-                    </select>
-                
-                    <textarea 
-                        id="review-text" 
-                        name="comentario" 
-                        placeholder="Escribe tu reseña aquí..." 
-                        rows="4" 
-                        required
-                    ></textarea>
-                
-                    <button type="submit">Enviar Reseña</button>
-                </form>
+        <div class="container-wrapper">
+            <div class="logo-container">
+                <div class="logo">
+                    <a href="Nosotros.html">
+                        <img src="images/logo san vicente.png" alt="Logo de la Clínica">
+                    </a>
+                </div>
             </div>
-
-            <!-- Reseñas a la derecha -->
-            <div class="reviews-list-container">
-                <h2>Reseñas de Pacientes</h2>
-                <ul id="reviews-list">
-                    <!-- Aquí se mostrarán las reseñas cargadas -->
+            <div class="menu-container">
+                <ul class="nav-menu">
+                    <li><a href="paginaprincipalPaciente.html" class="active">INICIO</a></li>
+                    <li><a href="servicios.html">SERVICIOS</a></li>
+                    <li><a href="especialidades.html">ESPECIALIDADES</a></li>
+                    <li><a href="reviews.html">REVIEWS</a></li>
+                    <li><a href="contactos.html">CONTACTOS</a></li>
                 </ul>
             </div>
         </div>
+    </header>
+
+    <section class="review-section">
+        <div class="review-form-container">
+            <h2>Escribe una Reseña</h2>
+            <form id="review-form" class="review-form">
+                <input type="text" id="review-name" name="nombrePaciente" placeholder="Tu nombre" required>
+                <select id="review-rating" name="calificacion" required>
+                    <option value="5">5 - Excelente</option>
+                    <option value="4">4 - Muy bueno</option>
+                    <option value="3">3 - Bueno</option>
+                    <option value="2">2 - Regular</option>
+                    <option value="1">1 - Malo</option>
+                </select>
+                <textarea id="review-text" name="comentario" placeholder="Escribe tu reseña aquí..." rows="4" required></textarea>
+                <button type="submit">Enviar Reseña</button>
+            </form>
+        </div>
+
+        <h2>Reseñas de Pacientes</h2>
+        <div id="reviews-list" class="reviews-list-container">
+            <!-- Aquí se cargarán las reseñas dinámicamente -->
+        </div>
     </section>
 
+    <!-- Modal de edición -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Editar Reseña</h2>
+            <form id="edit-review-form">
+                <input type="hidden" id="edit-review-id">
+                <label for="edit-review-name">Nombre:</label>
+                <input type="text" id="edit-review-name" required>
+    
+                <label for="edit-review-rating">Calificación:</label>
+                <select id="edit-review-rating" required>
+                    <option value="5">5 - Excelente</option>
+                    <option value="4">4 - Muy bueno</option>
+                    <option value="3">3 - Bueno</option>
+                    <option value="2">2 - Regular</option>
+                    <option value="1">1 - Malo</option>
+                </select>
+    
+                <label for="edit-review-comment">Comentario:</label>
+                <textarea id="edit-review-comment" rows="4" required></textarea>
+    
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" class="delete" onclick="confirmDelete()">Eliminar Reseña</button>
+            </form>
+        </div>
+    </div>
+    
+
     <footer class="footer">
-        <p>Emergencias: 955223631 | Citas: 955401599 | Ubicación: Av. San Martín #536</p>
-        <p>Clínica Señor de Luren - Todos los derechos reservados © 2024</p>
+        <p>Emergencias: 955223631 | Citas: 955401599 | Ubicación: Av. San Vicente #536</p>
+        <p>Clínica San Vicente - Todos los derechos reservados © 2024</p>
     </footer>
 
-    <!-- Link a Font Awesome para los íconos -->
-
-    <script>
-document.getElementById("review-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const reviewData = {
-        nombrePaciente: document.getElementById("review-name").value.trim(),
-        nombreDoctor: document.getElementById("doctor-select").value,
-        especialidad: document.getElementById("specialty-select").value,
-        calificacion: parseInt(document.getElementById("review-rating").value),
-        comentario: document.getElementById("review-text").value.trim()
-    };
-
-    console.log("Datos enviados:", reviewData);  // Verificar los datos en la consola
-
-    fetch("http://localhost:8080/api/reviews/add", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(reviewData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(text => { throw new Error(text) });
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Respuesta del servidor:", data);
-        const newReview = document.createElement("li");
-        newReview.innerHTML = `
-            <strong>${data.nombrePaciente}</strong> - 
-            <em>${data.calificacion} estrellas</em> 
-            (${data.nombreDoctor}, ${data.especialidad})
-            <p>${data.comentario}</p>
-        `;
-        document.getElementById("reviews-list").prepend(newReview);
-        document.getElementById("review-form").reset();
-        alert("Reseña enviada con éxito.");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Hubo un problema al enviar la reseña.");
-    });
-});
-
-
-    </script>
+    <script src="js/reviews.js"></script>
 </body>
 </html>

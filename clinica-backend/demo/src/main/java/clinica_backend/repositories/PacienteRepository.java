@@ -23,4 +23,13 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
      * @return Un {@link Optional} que contiene el paciente si se encuentra, o vacío si no.
      */
     Optional<Paciente> findByCorreoAndContraseña(String correo, String contraseña);
+
+    /**
+     * Busca un paciente por su correo.
+     * Este método se utiliza para obtener los detalles de un paciente.
+     *
+     * @param correo Correo del paciente.
+     * @return Un {@link Optional} que contiene el paciente si se encuentra, o vacío si no.
+     */
+    Optional<Paciente> findByCorreo(String correo);
 }

@@ -26,6 +26,15 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Optional<Medico> findByCorreoAndContraseña(String correo, String contraseña);
 
     /**
+     * Busca un médico por su correo.
+     * Este método se utiliza para obtener los detalles de un médico.
+     *
+     * @param correo Correo del médico.
+     * @return Un {@link Optional} que contiene el médico si se encuentra, o vacío si no.
+     */
+    Optional<Medico> findByCorreo(String correo);
+
+    /**
      * Obtiene todos los médicos que tienen una especialidad específica.
      *
      * @param especialidad Especialidad médica.
@@ -33,3 +42,4 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
      */
     List<Medico> findByEspecialidad(String especialidad);
 }
+
