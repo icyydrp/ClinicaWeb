@@ -10,26 +10,27 @@
     <div class="container">
         <!-- Formulario de registro -->
         <div class="form-container">
-            <form id="pacienteForm">
+            <form id="pacienteForm" action="/pacientes/registrar" method="POST">
                 <h1>Registro de Paciente</h1>
                 <span class="custom-span">Completa los datos y Regístrate</span>
                 <div class="input-container">
-                    <input type="text" id="nombres" name="nombres" placeholder="Nombres" required />
+                    <input type="text" name="nombres" placeholder="Nombres" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required />
+                    <input type="text" name="apellidos" placeholder="Apellidos" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="celular" name="celular" placeholder="Celular" required />
+                    <input type="text" name="celular" placeholder="Celular" pattern="\d{9}" title="Ingrese un número de celular válido (9 dígitos)" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" id="dni" name="dni" placeholder="DNI" required />
+                    <input type="text" name="dni" placeholder="DNI" pattern="\d{8}" title="Ingrese un DNI válido (8 dígitos)" required />
                 </div>
                 <div class="input-container">
-                    <input type="email" id="correo" name="correo" placeholder="Correo Electrónico" required />
+                    <input type="email" name="correo" placeholder="Correo Electrónico" required />
                 </div>
                 <div class="input-container">
                     <input type="password" id="contraseñaPaciente" name="contraseña" placeholder="Contraseña" required />
+                    <!-- Mensaje de validación de la contraseña -->
                     <small id="passwordRequirements" style="color: gray; display: block;">
                         La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.
                     </small>
@@ -37,7 +38,7 @@
                 <div class="input-container">
                     <input type="password" id="verificarContraseñaPaciente" name="verificarContraseña" placeholder="Verificar Contraseña" required />
                 </div>
-                <button type="button" id="registrarPacienteBtn">Registrarme</button>
+                <button type="submit">Registrarme</button>
             </form>
         </div>
 
@@ -54,130 +55,48 @@
     </div>
 
     <script>
-        document.getElementById('registrarPacienteBtn').addEventListener('click', function () {
-            // Obtener los datos del formulario
-            const nombres = document.getElementById('nombres').value.trim();
-            const apellidos = document.getElementById('apellidos').value.trim();
-            const celular = document.getElementById('celular').value.trim();
-            const dni = document.getElementById('dni').value.trim();
-            const correo = document.getElementById('correo').value.trim();
-            const contraseña = document.getElementById('contraseñaPaciente').value.trim();
-    
-            // Validación de campos vacíos
-            if (!nombres || !apellidos || !celular || !dni || !correo || !contraseña) {
-                alert('Todos los campos son obligatorios.');
+        // Validación de formulario
+        document.getElementById('pacienteForm').addEventListener('submit', function(event) {
+            const contraseña = document.getElementById('contraseñaPaciente').value;
+            const verificarContraseña = document.getElementById('verificarContraseñaPaciente').value;
+            const passwordRequirements = document.getElementById('passwordRequirements');
+
+            // Expresión regular para verificar que la contraseña sea segura
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Validación de la seguridad de la contraseña
+            if (!passwordRegex.test(contraseña)) {
+                passwordRequirements.style.color = 'red';
+                passwordRequirements.textContent = 'La contraseña no cumple con los requisitos. Debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.';
+                event.preventDefault(); // Detiene el envío del formulario si no cumple
+                return;
+            } else {
+                passwordRequirements.style.color = 'green';
+                passwordRequirements.textContent = 'La contraseña cumple con los requisitos.';
+            }
+
+            // Validación de coincidencia de contraseñas
+            if (contraseña !== verificarContraseña) {
+                alert('Las contraseñas no coinciden.');
+                event.preventDefault(); // Detiene el envío del formulario si no coinciden
                 return;
             }
-    
-            // Crear un objeto con los datos del paciente
-            const pacienteData = {
-                nombres: nombres,
-                apellidos: apellidos,
-                celular: celular,
-                dni: dni,
-                correo: correo,
-                contraseña: contraseña,
-            };
-    
-            // Enviar los datos al backend como JSON usando fetch
-            fetch('http://localhost:8080/paciente/registrar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(pacienteData),
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        return response.json().then((errorData) => {
-                            throw new Error(errorData.error || 'Error en la solicitud: ' + response.status);
-                        });
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    if (data.token) {
-                        // Guardar el token en localStorage
-                        localStorage.setItem('authToken', data.token);
-    
-                        // Incluir el token en las solicitudes automáticamente
-                        setAuthorizationHeader();
-    
-                        // Redirigir a la página principal del paciente
-                        window.location.href = "/paginaprincipalPaciente.html";
-                    } else {
-                        throw new Error('No se recibió un token en la respuesta.');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al registrar el paciente: ' + error.message);
-                });
         });
-    
-        // Modificación para incluir el token JWT en todas las solicitudes fetch
-        function setAuthorizationHeader() {
-            const originalFetch = fetch;
-            window.fetch = function () {
-                const args = arguments;
-    
-                if (!args[1]) {
-                    args[1] = {};
-                }
-                if (!args[1].headers) {
-                    args[1].headers = {};
-                }
-    
-                // Obtener el token del localStorage
-                const token = localStorage.getItem('authToken');
-                if (token) {
-                    args[1].headers['Authorization'] = 'Bearer ' + token;
-                }
-    
-                return originalFetch.apply(this, arguments);
-            };
-        }
-    
-        // Validación de contraseña mientras el usuario escribe
-        document.getElementById('contraseñaPaciente').addEventListener('input', function () {
+
+        // Mostrar requisitos de la contraseña al usuario mientras escribe
+        document.getElementById('contraseñaPaciente').addEventListener('input', function() {
             const contraseña = this.value;
             const passwordRequirements = document.getElementById('passwordRequirements');
             const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    
+
             if (passwordRegex.test(contraseña)) {
                 passwordRequirements.style.color = 'green';
                 passwordRequirements.textContent = 'La contraseña cumple con los requisitos.';
             } else {
-                passwordRequirements.style.color = 'red';
+                passwordRequirements.style.color = 'gray';
                 passwordRequirements.textContent = 'La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, un número y un símbolo.';
             }
         });
-    
-        // Validación de coincidencia de contraseñas mientras el usuario escribe
-        document.getElementById('verificarContraseñaPaciente').addEventListener('input', function () {
-            const contraseña = document.getElementById('contraseñaPaciente').value;
-            const verificarContraseña = this.value;
-    
-            if (contraseña !== verificarContraseña) {
-                this.setCustomValidity('Las contraseñas no coinciden.');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-
-        function customFetch(url, options = {}) {
-    if (!options.headers) {
-        options.headers = {};
-    }
-    const token = localStorage.getItem('authToken');
-    if (token) {
-        options.headers['Authorization'] = 'Bearer ' + token;
-    }
-    return fetch(url, options);
-}
-
     </script>
-    
-    
 </body>
 </html>

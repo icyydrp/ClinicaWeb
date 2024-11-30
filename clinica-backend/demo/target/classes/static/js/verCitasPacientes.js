@@ -88,12 +88,13 @@ function mostrarCitas(citas) {
         const comentario = cita.comentario || 'Sin comentario disponible';
         const estado = cita.estado || 'Pendiente';
 
-        // Verificar si el objeto paciente existe
-        const pacienteId = cita.paciente ? cita.paciente.id : null;
+        // Manejar pacienteId nulo
+        const pacienteId = cita.paciente && cita.paciente.id ? cita.paciente.id : null;
+
+        console.log(`Estado: ${estado}, PacienteId: ${pacienteId}`); // Depuración
 
         let botones = '';
 
-        // Mostrar los botones de modificar y cancelar si la cita está pendiente
         if (estado.toLowerCase() === 'pendiente') {
             botones = `
                 <button class="btn btn-warning me-2" 
@@ -102,13 +103,14 @@ function mostrarCitas(citas) {
                 </button>
                 <button class="btn btn-danger" onclick="cancelarCita(${cita.id})">Cancelar</button>`;
         }
+        console.log("Cita recibida:", cita);
+        console.log(`PacienteId en la cita: ${cita.paciente ? cita.paciente.id : 'null'}`);
+        
+        const botonReceta = (estado.toLowerCase() === 'aceptada' && cita.paciente && cita.paciente.id)
+        ? `<button class="btn btn-primary mt-2" onclick="verReceta(${cita.paciente.id})">Ver Receta</button>`
+        : '';
 
-        // Botón para ver la receta si la cita está aceptada y tiene un paciente
-        const botonReceta = (estado.toLowerCase() === 'aceptada' && pacienteId)
-            ? `<button class="btn btn-primary mt-2" onclick="verReceta(${pacienteId})">Ver Receta</button>`
-            : '';
 
-        // Generar el contenido HTML para la cita
         listaCitas.innerHTML += `
             <div class="list-group-item mb-3">
                 <p><strong>Fecha:</strong> ${fecha}</p>
@@ -289,6 +291,7 @@ function actualizarContadorNotificaciones(cantidad) {
     function verReceta(pacienteId) {
         window.location.href = `VerReceta.html?pacienteId=${pacienteId}`;
     }
+    
     
     
     

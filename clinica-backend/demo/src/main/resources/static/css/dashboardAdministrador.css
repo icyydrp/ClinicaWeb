@@ -1,0 +1,45 @@
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    min-height: 100vh;
+    position: fixed;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.components {
+    padding: 0;
+    list-style: none;
+}
+
+.components li a {
+    padding: 15px 20px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.components li a:hover {
+    background-color: #495057;
+}
+
+#content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+.card {
+    border-radius: 8px;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+}
+
+.card-body i {
+    font-size: 2.5rem;
+}

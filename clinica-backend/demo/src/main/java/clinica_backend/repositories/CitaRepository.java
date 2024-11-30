@@ -154,4 +154,6 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
      */
     @Query("SELECT r FROM Receta r WHERE r.cita.paciente.id = :pacienteId")
     List<Receta> findByCita_Paciente_Id(@Param("pacienteId") Long pacienteId);
+
+    
 }

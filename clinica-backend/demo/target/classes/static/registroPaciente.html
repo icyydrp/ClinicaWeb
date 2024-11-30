@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Formulario de registro -->
         <div class="form-container">
-            <form id="pacienteForm" action="http://localhost:8080/paciente" method="POST">
+            <form id="pacienteForm" action="/pacientes/registrar" method="POST">
                 <h1>Registro de Paciente</h1>
                 <span class="custom-span">Completa los datos y Regístrate</span>
                 <div class="input-container">
@@ -20,10 +20,10 @@
                     <input type="text" name="apellidos" placeholder="Apellidos" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" name="celular" placeholder="Celular" required />
+                    <input type="text" name="celular" placeholder="Celular" pattern="\d{9}" title="Ingrese un número de celular válido (9 dígitos)" required />
                 </div>
                 <div class="input-container">
-                    <input type="text" name="dni" placeholder="DNI" required />
+                    <input type="text" name="dni" placeholder="DNI" pattern="\d{8}" title="Ingrese un DNI válido (8 dígitos)" required />
                 </div>
                 <div class="input-container">
                     <input type="email" name="correo" placeholder="Correo Electrónico" required />
@@ -55,6 +55,7 @@
     </div>
 
     <script>
+        // Validación de formulario
         document.getElementById('pacienteForm').addEventListener('submit', function(event) {
             const contraseña = document.getElementById('contraseñaPaciente').value;
             const verificarContraseña = document.getElementById('verificarContraseñaPaciente').value;
@@ -86,7 +87,7 @@
         document.getElementById('contraseñaPaciente').addEventListener('input', function() {
             const contraseña = this.value;
             const passwordRequirements = document.getElementById('passwordRequirements');
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(ñ?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
             if (passwordRegex.test(contraseña)) {
                 passwordRequirements.style.color = 'green';

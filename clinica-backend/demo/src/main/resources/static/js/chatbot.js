@@ -1,4 +1,3 @@
-// Obtener referencias a elementos del chatbot
 const chatbotContainer = document.getElementById('chatbot-container');
 const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
 const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
@@ -75,36 +74,25 @@ function generateResponse(message) {
     setTimeout(() => addMessage('Chatbot', response, 'bot-message'), 500);
 }
 
-// Modificación para incluir el token JWT en todas las solicitudes fetch
-(function () {
-    const originalFetch = fetch;
-    window.fetch = function () {
-        const args = arguments;
+// Función para cerrar sesión
+function cerrarSesion() {
+    fetch('/logout', { method: 'GET' })
+        .then(() => window.location.href = "/paginainicio.html")
+        .catch(error => console.error('Error al cerrar sesión:', error));
+}
 
-        // Obtener el token del localStorage
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            if (!args[1]) {
-                args[1] = {};
-            }
-            if (!args[1].headers) {
-                args[1].headers = {};
-            }
-            args[1].headers['Authorization'] = 'Bearer ' + token;
-        }
-
-        return originalFetch.apply(this, arguments);
-    };
-})();
-
-// Verificar la validez del token al cargar la página principal del paciente
-document.addEventListener('DOMContentLoaded', function () {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-        // Redirigir al login si no hay un token
-        alert('No tienes autorización. Por favor, inicia sesión.');
-        window.location.href = '/login.html';
-    } else {
-        console.log('Token presente, acceso permitido a la página principal del paciente.');
-    }
-});
+ // Obtener los datos del paciente desde la sesión almacenada por el backend
+ fetch('/api/paciente/sesion')
+ .then(response => response.json())
+ .then(paciente => {
+     if (paciente) {
+         document.getElementById('nombrePaciente').textContent = 
+             `${paciente.nombres} ${paciente.apellidos}`;
+         document.getElementById('correoPaciente').textContent = paciente.correo;
+         document.getElementById('celularPaciente').textContent = paciente.celular;
+         document.getElementById('dniPaciente').textContent = paciente.dni;
+     } else {
+         alert('Error al obtener los datos del paciente.');
+     }
+ })
+ .catch(error => console.error('Error al cargar los datos del paciente:', error));

@@ -4,89 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reseñas de Pacientes - Clínica San Vicente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/reviews.css">
-    <link rel="stylesheet" href="css/inicio.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container-wrapper">
-            <div class="logo-container">
-                <div class="logo">
-                    <a href="Nosotros.html">
-                        <img src="images/logo san vicente.png" alt="Logo de la Clínica">
-                    </a>
-                </div>
+    <header class="bg-light shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <div>
+                <a href="Nosotros.html">
+                    <img src="images/logo san vicente.png" alt="Logo de la Clínica" class="logo">
+                </a>
             </div>
-            <div class="menu-container">
-                <ul class="nav-menu">
-                    <li><a href="paginaprincipalPaciente.html" class="active">INICIO</a></li>
-                    <li><a href="servicios.html">SERVICIOS</a></li>
-                    <li><a href="especialidades.html">ESPECIALIDADES</a></li>
-                    <li><a href="reviews.html">REVIEWS</a></li>
-                    <li><a href="contactos.html">CONTACTOS</a></li>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link active" href="paginaprincipalPaciente.html">INICIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicios.html">SERVICIOS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="especialidades.html">ESPECIALIDADES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">REVIEWS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactos.html">CONTACTOS</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <section class="review-section">
-        <div class="review-form-container">
-            <h2>Escribe una Reseña</h2>
-            <form id="review-form" class="review-form">
-                <input type="text" id="review-name" name="nombrePaciente" placeholder="Tu nombre" required>
-                <select id="review-rating" name="calificacion" required>
-                    <option value="5">5 - Excelente</option>
-                    <option value="4">4 - Muy bueno</option>
-                    <option value="3">3 - Bueno</option>
-                    <option value="2">2 - Regular</option>
-                    <option value="1">1 - Malo</option>
-                </select>
-                <textarea id="review-text" name="comentario" placeholder="Escribe tu reseña aquí..." rows="4" required></textarea>
-                <button type="submit">Enviar Reseña</button>
-            </form>
-        </div>
-
-        <h2>Reseñas de Pacientes</h2>
-        <div id="reviews-list" class="reviews-list-container">
-            <!-- Aquí se cargarán las reseñas dinámicamente -->
+    <section class="review-section py-5">
+        <div class="container">
+            <!-- Formulario para añadir reseñas -->
+            <div class="row mb-5">
+                <div class="col-md-6 mx-auto">
+                    <h2 class="text-center mb-4">Escribe una Reseña</h2>
+                    <form id="review-form" class="shadow p-4 rounded">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="review-name" name="nombrePaciente" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" id="review-rating" name="calificacion" required>
+                                <option value="5">5 - Excelente</option>
+                                <option value="4">4 - Muy bueno</option>
+                                <option value="3">3 - Bueno</option>
+                                <option value="2">2 - Regular</option>
+                                <option value="1">1 - Malo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="review-text" name="comentario" placeholder="Escribe tu reseña aquí..." rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enviar Reseña</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Título de reseñas -->
+            <h2 class="text-center mb-4">Reseñas de Pacientes</h2>
+    
+            <!-- Contenedor de reseñas como tarjetas -->
+            <div id="reviews-list" class="row row-cols-1 row-cols-md-2 g-4">
+                <!-- Las reseñas se cargarán aquí dinámicamente -->
+            </div>
         </div>
     </section>
 
     <!-- Modal de edición -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
-            <h2>Editar Reseña</h2>
-            <form id="edit-review-form">
-                <input type="hidden" id="edit-review-id">
-                <label for="edit-review-name">Nombre:</label>
-                <input type="text" id="edit-review-name" required>
-    
-                <label for="edit-review-rating">Calificación:</label>
-                <select id="edit-review-rating" required>
-                    <option value="5">5 - Excelente</option>
-                    <option value="4">4 - Muy bueno</option>
-                    <option value="3">3 - Bueno</option>
-                    <option value="2">2 - Regular</option>
-                    <option value="1">1 - Malo</option>
-                </select>
-    
-                <label for="edit-review-comment">Comentario:</label>
-                <textarea id="edit-review-comment" rows="4" required></textarea>
-    
-                <button type="submit">Guardar Cambios</button>
-                <button type="button" class="delete" onclick="confirmDelete()">Eliminar Reseña</button>
-            </form>
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Reseña</h5>
+                    <button type="button" class="btn-close" onclick="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-review-form">
+                        <input type="hidden" id="edit-review-id">
+                        <div class="mb-3">
+                            <label for="edit-review-name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="edit-review-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-review-rating" class="form-label">Calificación:</label>
+                            <select class="form-select" id="edit-review-rating" required>
+                                <option value="5">5 - Excelente</option>
+                                <option value="4">4 - Muy bueno</option>
+                                <option value="3">3 - Bueno</option>
+                                <option value="2">2 - Regular</option>
+                                <option value="1">1 - Malo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-review-comment" class="form-label">Comentario:</label>
+                            <textarea class="form-control" id="edit-review-comment" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Eliminar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    
 
-    <footer class="footer">
+    <footer class="bg-dark text-white text-center py-3">
         <p>Emergencias: 955223631 | Citas: 955401599 | Ubicación: Av. San Vicente #536</p>
         <p>Clínica San Vicente - Todos los derechos reservados © 2024</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/reviews.js"></script>
 </body>
 </html>

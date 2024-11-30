@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Usuarios</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/gestionarUsuarios.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Gestión de Usuarios</h1>
+
+        <!-- Navegación por pestañas -->
+        <ul class="nav nav-tabs" id="usuariosTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pacientes-tab" data-bs-toggle="tab" data-bs-target="#pacientes" type="button" role="tab">Pacientes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="medicos-tab" data-bs-toggle="tab" data-bs-target="#medicos" type="button" role="tab">Médicos</button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="usuariosTabContent">
+            <!-- Apartado de Pacientes -->
+            <div class="tab-pane fade show active" id="pacientes" role="tabpanel" aria-labelledby="pacientes-tab">
+                <div class="mb-3 d-flex">
+                    <input type="text" class="form-control me-2" id="searchPaciente" placeholder="Buscar paciente por nombre, correo o DNI">
+                    <button class="btn btn-primary" id="searchPacienteBtn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>DNI</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pacientesTable">
+                            <!-- Aquí se cargarán los pacientes dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-success" id="addPacienteBtn"><i class="fas fa-user-plus"></i> Agregar Paciente</button>
+                </div>
+            </div>
+
+            <!-- Apartado de Médicos -->
+            <div class="tab-pane fade" id="medicos" role="tabpanel" aria-labelledby="medicos-tab">
+                <div class="mb-3 d-flex">
+                    <input type="text" class="form-control me-2" id="searchMedico" placeholder="Buscar médico por nombre, correo o DNI">
+                    <button class="btn btn-primary" id="searchMedicoBtn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>DNI</th>
+                                <th>Especialidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medicosTable">
+                            <!-- Aquí se cargarán los médicos dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-end mt-3">
+                    <button class="btn btn-success" id="addMedicoBtn"><i class="fas fa-user-plus"></i> Agregar Médico</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script para gestionar usuarios -->
+    <script src="js/gestionarUsuarios.js"></script>
+</body>
+</html>

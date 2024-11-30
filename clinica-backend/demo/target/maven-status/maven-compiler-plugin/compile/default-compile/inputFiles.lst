@@ -1,28 +1,35 @@
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\config\CorsConfig.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\config\JacksonConfig.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\ChatController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\CitaController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\FileController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\HomeController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\LoginController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\MedicoController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\PacienteController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\PerfilController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\controllers\ReviewController.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\demo\DemoApplication.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Chat.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Cita.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Medico.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Notificacion.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Paciente.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Receta.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\models\Review.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\ChatRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\CitaRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\MedicoRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\NotificacionRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\PacienteRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\RecetaRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\repositories\ReviewRepository.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\services\NotificacionService.java
-C:\Users\Administrator\Documents\DOCUMENTOS DE CURSOS UNIVERSIDAD\Curso Integrador I - Sistemas Software\clinica-backend\demo\src\main\java\clinica_backend\services\ReviewService.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\config\JacksonConfig.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\config\WebConfig.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\ChatController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\CitaController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\CitasReporteController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\ConfiguracionController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\EstadisticasController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\FileController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\HomeController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\LoginController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\MedicoController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\MedicosReporteController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\PacienteController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\PacientesReporteController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\PerfilController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\RecetaController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\controllers\ReviewController.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\demo\DemoApplication.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Chat.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Cita.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Medico.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Notificacion.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Paciente.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Receta.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\models\Review.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\ChatRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\CitaRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\MedicoRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\NotificacionRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\PacienteRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\RecetaRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\repositories\ReviewRepository.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\services\MedicoService.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\services\NotificacionService.java
+C:\Users\USER\Downloads\pagina-web\demo\src\main\java\clinica_backend\services\ReviewService.java

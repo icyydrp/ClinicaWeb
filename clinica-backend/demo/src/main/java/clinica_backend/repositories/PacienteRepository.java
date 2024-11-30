@@ -1,5 +1,6 @@
 package clinica_backend.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,21 +16,37 @@ import clinica_backend.models.Paciente;
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     /**
-     * Busca un paciente por su correo y contraseña.
-     * Este método se utiliza para autenticar pacientes en el sistema.
-     *
+     * Buscar pacientes por correo y contraseña.
+     * 
      * @param correo Correo del paciente.
      * @param contraseña Contraseña del paciente.
-     * @return Un {@link Optional} que contiene el paciente si se encuentra, o vacío si no.
+     * @return Paciente encontrado o vacío si no existe.
      */
     Optional<Paciente> findByCorreoAndContraseña(String correo, String contraseña);
 
     /**
-     * Busca un paciente por su correo.
-     * Este método se utiliza para obtener los detalles de un paciente.
-     *
+     * Buscar pacientes por nombres, correo o DNI.
+     * 
+     * @param nombres Nombre parcial del paciente.
+     * @param correo Correo parcial del paciente.
+     * @param dni DNI parcial del paciente.
+     * @return Lista de pacientes coincidentes.
+     */
+    List<Paciente> findByNombresContainingIgnoreCaseOrCorreoContainingIgnoreCaseOrDniContaining(String nombres, String correo, String dni);
+
+    /**
+     * Buscar un paciente por correo.
+     * 
      * @param correo Correo del paciente.
-     * @return Un {@link Optional} que contiene el paciente si se encuentra, o vacío si no.
+     * @return Paciente encontrado o vacío si no existe.
      */
     Optional<Paciente> findByCorreo(String correo);
+
+    /**
+     * Buscar un paciente por DNI.
+     * 
+     * @param dni DNI del paciente.
+     * @return Paciente encontrado o vacío si no existe.
+     */
+    Optional<Paciente> findByDni(String dni);
 }

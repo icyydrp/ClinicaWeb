@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Médico - Clínica</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/registrarMedico.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4><i class="fas fa-user-md me-2"></i>Registrar Médico</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Contenedor para mostrar mensajes -->
+                        <div id="mensaje" class="my-3"></div>
+                        
+                        <form id="formRegistrarMedico">
+                            <div class="mb-3">
+                                <label for="nombres" class="form-label"><i class="fas fa-user me-2"></i>Nombres</label>
+                                <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese nombres completos" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellidos" class="form-label"><i class="fas fa-user-tag me-2"></i>Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese apellidos completos" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label"><i class="fas fa-envelope me-2"></i>Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese correo electrónico" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contraseña" class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                                <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese una contraseña segura" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numeroColegiatura" class="form-label"><i class="fas fa-id-badge me-2"></i>Número de Colegiatura</label>
+                                <input type="text" class="form-control" id="numeroColegiatura" name="numeroColegiatura" placeholder="Ingrese número de colegiatura" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="especialidad" class="form-label">Especialidad</label>
+                                <input type="text" class="form-control" id="especialidad" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dni" class="form-label"><i class="fas fa-id-card me-2"></i>DNI</label>
+                                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" required>
+                            </div>
+                           
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Registrar</button>
+                                <a href="/dashboardAdministrador.html" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Registrar Médico JS -->
+    <script src="js/registrarMedico.js"></script>
+</body>
+</html>

@@ -9,21 +9,22 @@
 <body>
     <div class="container">
         <div class="form-container sign-in-container">
-            <form id="loginForm">
+            <form action="http://localhost:8080/login" method="POST">
                 <h1>Iniciar Sesión</h1>
                 <div class="input-container">
-                    <input type="email" id="correo" name="correo" placeholder="Email" required>
+                    <input type="email" id="correo" name="correo" placeholder="Email" value="administradorclinica@hotmail.com" required>
                     <label for="correo"></label>
                 </div>
                 <div class="input-container">
-                    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" value="" required>
                     <label for="contraseña"></label>
                     <small id="error-message" class="error-message" style="display:none;">
                         Los datos ingresados son incorrectos
                     </small>
                 </div>
-                <button type="button" id="loginButton">Iniciar Sesión</button>
+                <button type="submit">Iniciar Sesión</button>
             </form>
+            
         </div>
 
         <div class="overlay-container">
@@ -49,47 +50,16 @@
     </div>
 
     <script>
-        document.getElementById('loginButton').addEventListener('click', function(event) {
-            const correo = document.getElementById('correo').value;
-            const contraseña = document.getElementById('contraseña').value;
-    
-            // Crear el objeto con los datos del usuario
-            const loginData = {
-                correo: correo,
-                contraseña: contraseña
-            };
-    
-            // Enviar los datos al backend como JSON usando fetch
-            fetch('http://localhost:8080/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Credenciales incorrectas');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.token && data.redirectUrl) {
-                    // Guardar el token en localStorage
-                    localStorage.setItem('authToken', data.token);
-                    // Redirigir al usuario a la URL recibida del backend
-                    window.location.href = data.redirectUrl;
-                } else {
-                    // Mostrar mensaje de error si las credenciales son incorrectas
-                    document.getElementById('error-message').style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+        // Mostrar el mensaje de error si existe en la URL
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get('error');
+
+            if (error === 'invalid') {
                 document.getElementById('error-message').style.display = 'block';
-            });
-        });
-    
+            }
+        };
+
         // Mostrar y ocultar las opciones de registro
         function toggleRegisterOptions() {
             const registerOptions = document.getElementById('register-options');
@@ -98,6 +68,6 @@
                 ? 'block' : 'none';
         }
     </script>
-    
+
 </body>
 </html>

@@ -1,450 +1,110 @@
-
-/* Estilo general */
+/* General Styles */
 body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f5f5f5;
 }
 
-/* Sección de reseñas */
-.review-section {
-    padding: 100px 400px;
-    text-align: center;
+/* Header Styles */
+.logo {
+    max-height: 50px;
 }
 
+header {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Review Section */
 .review-section h2 {
-    font-size: 28px;
-    color: #333;
+    color: #0056b3;
+    font-weight: 700;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-/* Formulario de agregar reseñas */
-.review-form-container {
-    background-color: #f9f9f9;
-    border-radius: 10px;
+.review-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.review-form-container h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
 }
 
 .review-form input,
 .review-form select,
 .review-form textarea {
-    width: 100%;
     margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.review-form input::placeholder,
-.review-form textarea::placeholder {
-    color: #999;
-}
-
-.review-form input:focus,
-.review-form select:focus,
-.review-form textarea:focus {
-    border-color: #00ffd5;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 255, 213, 0.5);
-}
-
-button {
-    width: 100%;
-    background-color: #00ffd5;
-    color: #333;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover {
-    background-color: #009488;
-    color: white;
-}
-
-/* Contenedor de reseñas */
-.reviews-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px;
-}
-
-/* Tarjetas de reseñas */
-.review-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: left;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.review-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.review-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.review-card-header h3 {
-    font-size: 18px;
-    color: #333;
-    margin: 0;
-}
-
-.review-card-header small {
-    font-size: 14px;
-    color: #666;
-}
-
-.review-card p {
-    font-size: 16px;
-    color: #555;
-    margin-top: 10px;
-    line-height: 1.5;
-}
-
-/* Botones en las tarjetas de reseñas */
-.review-card button {
-    margin-top: 20px; /* Espaciado entre botones */
-    margin-bottom: 1px; /* Espaciado inferior para alineación */
-    padding: 8px; /* Tamaño del botón */
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Tamaño del texto en los botones */
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Estilo para el botón de eliminar */
-.review-card button:first-child {
-    background-color: #ff5c5c;
-    color: #fff;
-}
-
-.review-card button:first-child:hover {
-    background-color: #d83434;
-}
-
-/* Estilo para el botón de editar */
-.review-card button:last-child {
-    background-color: #00ffd5;
-    color: #333;
-}
-
-.review-card button:last-child:hover {
-    background-color: #009488;
-    color: #fff;
-}
-
-
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    font-size: 14px;
-}
-
-
-/* Tarjetas de reseñas */
-.review-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex; /* Para alinear avatar y contenido */
-    gap: 15px;
-    text-align: left;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.review-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Avatar */
-.review-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #00ffd5;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
-    flex-shrink: 0;
-}
-
-/* Contenido de la reseña */
-.review-content {
-    flex-grow: 1;
-}
-
-/* Encabezado de la reseña */
-.review-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.review-card-header h3 {
-    font-size: 16px;
-    color: #333;
-    margin: 0;
-}
-
-.review-card-header small {
-    font-size: 12px;
-    color: #888;
-}
-
-/* Estrellas de calificación */
-.review-stars {
-    color: #ffc107;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.review-stars .empty {
-    color: #ddd; /* Color de las estrellas vacías */
-}
-
-/* Comentario */
-.review-card p {
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
-    line-height: 1.5;
-}
-
-/* Acciones */
-.review-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.review-actions button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.review-actions .delete {
-    background-color: #ff5c5c;
-    color: #fff;
-}
-
-.review-actions .delete:hover {
-    background-color: #d83434;
-}
-
-.review-actions .edit {
-    background-color: #00ffd5;
-    color: #333;
-}
-
-.review-actions .edit:hover {
-    background-color: #009488;
-    color: #fff;
-}
-
-/* Estilo para el modal */
-.modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    text-align: left;
-    position: relative;
-}
-
-.modal-content h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.modal-content label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-    width: 100%;
-    margin-bottom: 15px;
+    border: 1px solid #ced4da;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.modal-content button {
     width: 100%;
-    background-color: #00ffd5;
-    color: #333;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.modal-content button:hover {
-    background-color: #009488;
+.review-form button {
+    background-color: #0056b3;
     color: white;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-button:hover {
-    color: #ff5c5c;
-}
-
-/* General */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f5f5f5;
-}
-
-/* Sección de reseñas */
-.review-section {
-    padding: 100px 400px;
-    text-align: center;
-}
-
-.review-section h2 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Formulario */
-.review-form-container {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.review-form input,
-.review-form select,
-.review-form textarea {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-button {
-    background-color: #00ffd5;
-    padding: 12px;
     border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
     font-size: 16px;
-    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #009488;
+.review-form button:hover {
+    background-color: #004085;
 }
 
-/* Modal */
+/* Reviews List */
+.reviews-list-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 50px;
 }
 
 .modal-content {
     background-color: #fff;
-    border-radius: 10px;
+    margin: 5% auto;
     padding: 20px;
-    width: 400px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .close-button {
     float: right;
-    font-size: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dc3545;
     cursor: pointer;
 }
 
-/* Botón eliminar */
-.modal-content .delete {
-    background-color: #ff5c5c;
+.close-button:hover {
+    color: #a71d2a;
+}
+
+/* Button Styles */
+.btn-success {
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 10px;
@@ -452,71 +112,68 @@ button:hover {
     cursor: pointer;
 }
 
-
-/* Estilo general */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f5f5f5;
+.btn-success:hover {
+    background-color: #218838;
 }
 
-/* Sección de reseñas */
-.review-section {
-    padding: 100px 15px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-}
-
-.review-section h2 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* Contenedor de reseñas */
-.reviews-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
     padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* Tarjetas de reseñas */
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* General Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Wrapper to push the footer down */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Ensure it stays at the bottom */
+    font-size: 14px;
+}
 .review-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     display: flex;
     gap: 15px;
-    text-align: left;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.review-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Avatar */
 .review-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #00ffd5;
+    background: #0056b3;
     color: white;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    font-size: 20px;
     font-weight: bold;
-    font-size: 18px;
-    text-transform: uppercase;
 }
 
-/* Contenido de la reseña */
 .review-content {
     flex: 1;
 }
@@ -525,114 +182,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.review-card-header h3 {
-    font-size: 18px;
-    color: #333;
-    margin: 0;
-    font-weight: bold;
-}
-
-.review-card-header small {
-    font-size: 14px;
-    color: #888;
+    margin-bottom: 10px;
 }
 
 .review-stars {
     color: #ffc107;
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 1.2rem;
 }
 
-.review-card p {
-    font-size: 14px;
-    color: #555;
+.review-actions button {
     margin-top: 10px;
-    line-height: 1.5;
+    font-size: 0.9rem;
 }
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    position: relative;
-    text-align: center;
-}
-
-.modal-content h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.modal-content label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.modal-content button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.modal-content button:hover {
-    opacity: 0.9;
-}
-
-.modal-content .delete {
-    background-color: #ff5c5c;
-    color: white;
-}
-
-.modal-content .delete:hover {
-    background-color: #d83434;
-}
-
-.modal-content .close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.modal-content .close-button:hover {
-    color: #ff5c5c;
-}
-

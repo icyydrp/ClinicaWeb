@@ -130,10 +130,13 @@ import jakarta.servlet.http.HttpSession;
     @GetMapping("/citas/paciente/{pacienteId}")
     public ResponseEntity<?> obtenerCitasPorPaciente(@PathVariable Long pacienteId) {
         try {
+            // Obtiene todas las citas asociadas al paciente
             List<Cita> citas = citaRepository.findByPaciente_Id(pacienteId);
             System.out.println("Número de citas encontradas: " + citas.size());
-
+    
+            // Lista para almacenar los datos formateados
             List<Map<String, Object>> citasConComentario = new ArrayList<>();
+    
             for (Cita cita : citas) {
                 Map<String, Object> citaInfo = new HashMap<>();
                 citaInfo.put("id", cita.getId());
@@ -143,22 +146,36 @@ import jakarta.servlet.http.HttpSession;
                 citaInfo.put("motivo", cita.getMotivo());
                 citaInfo.put("estado", cita.getEstado());
                 citaInfo.put("comentario", cita.getComentario());
-
+    
+                // Información del médico (si existe)
                 if (cita.getMedico() != null) {
                     Map<String, Object> medicoInfo = new HashMap<>();
                     medicoInfo.put("nombres", cita.getMedico().getNombres());
                     medicoInfo.put("apellidos", cita.getMedico().getApellidos());
                     citaInfo.put("medico", medicoInfo);
                 }
-
+    
+                // Información del paciente
+                if (cita.getPaciente() != null) {
+                    Map<String, Object> pacienteInfo = new HashMap<>();
+                    pacienteInfo.put("id", cita.getPaciente().getId());
+                    pacienteInfo.put("nombres", cita.getPaciente().getNombres());
+                    pacienteInfo.put("apellidos", cita.getPaciente().getApellidos());
+                    citaInfo.put("paciente", pacienteInfo); // Incluye paciente en la respuesta
+                }
+    
                 citasConComentario.add(citaInfo);
             }
+    
+            // Retorna las citas procesadas
             return ResponseEntity.ok(citasConComentario);
+    
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al obtener citas.");
         }
     }
+    
 
 
 
@@ -364,7 +381,7 @@ import jakarta.servlet.http.HttpSession;
             return ResponseEntity.ok("Notificación creada con éxito.");
         }
 
-    @GetMapping("/sesion/medico")
+        @GetMapping("/sesion/medico")
     public ResponseEntity<Map<String, Long>> obtenerMedicoSesion(HttpSession session) {
         Medico medico = (Medico) session.getAttribute("medico");  // Recuperar el objeto médico de la sesión
         if (medico != null) {
@@ -374,7 +391,7 @@ import jakarta.servlet.http.HttpSession;
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);  // Si no hay sesión
     }
-
+        
 
 
 
@@ -618,19 +635,20 @@ import jakarta.servlet.http.HttpSession;
 
 
     @GetMapping("/paciente/{pacienteId}/recetas")
-    public ResponseEntity<List<Map<String, Object>>> obtenerRecetasPorPaciente(@PathVariable Long pacienteId) {
-        System.out.println("Buscando recetas para paciente con ID: " + pacienteId); // Log para verificar
+public ResponseEntity<List<Map<String, Object>>> obtenerRecetasPorPaciente(@PathVariable Long pacienteId) {
+    System.out.println("Buscando recetas para paciente con ID: " + pacienteId); // Log para verificar
 
-        List<Receta> recetas = recetaRepository.findByCita_Paciente_Id(pacienteId);
+    List<Receta> recetas = recetaRepository.findByCita_Paciente_Id(pacienteId);
 
-        if (recetas.isEmpty()) {
-            System.out.println("No se encontraron recetas para el paciente con ID: " + pacienteId); // Log para verificar
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
-        }
+    System.out.println("Recetas encontradas: " + recetas.size()); // Verifica cuántas recetas se obtuvieron
 
+    if (recetas.isEmpty()) {
+        System.out.println("No se encontraron recetas para el paciente con ID: " + pacienteId); // Log para verificar
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+    }
+    
         List<Map<String, Object>> recetasInfo = recetas.stream().map(receta -> {
             Map<String, Object> recetaInfo = new HashMap<>();
-
             recetaInfo.put("id", receta.getId());
             recetaInfo.put("medicamentos", receta.getMedicamentos());
             recetaInfo.put("dosis", receta.getDosis());
@@ -638,21 +656,22 @@ import jakarta.servlet.http.HttpSession;
             recetaInfo.put("instrucciones", receta.getInstrucciones());
             recetaInfo.put("notaAdicional", receta.getNotaAdicional());
             recetaInfo.put("fechaEmision", receta.getFechaEmision());
-
+    
             Cita cita = receta.getCita();
             recetaInfo.put("medicoNombre", cita.getMedico().getNombres());
             recetaInfo.put("medicoCorreo", cita.getMedico().getCorreo());
-
+    
             Paciente paciente = cita.getPaciente();
             recetaInfo.put("pacienteNombre", paciente.getNombres() + " " + paciente.getApellidos());
             recetaInfo.put("pacienteCorreo", paciente.getCorreo());
             recetaInfo.put("pacienteCelular", paciente.getCelular());
-
+    
             return recetaInfo;
         }).collect(Collectors.toList());
-
+    
         return ResponseEntity.ok(recetasInfo);
     }
+    
 
         @GetMapping("/pacientes/con-citas-aceptadas")
     public List<Map<String, Object>> obtenerPacientesConCitasAceptadas() {

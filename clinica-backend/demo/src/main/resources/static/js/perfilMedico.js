@@ -37,7 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para cargar los datos del médico desde el backend
     function cargarDatosMedico() {
         fetch('/api/perfil/medico')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error('Error al cargar los datos del médico.');
+                return response.json();
+            })
             .then(data => {
                 if (data) {
                     document.getElementById('nombre').value = data.nombres || '';
@@ -46,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.getElementById('dni').value = data.dni || '';
                     document.getElementById('especialidad').value = data.especialidad || '';
                     document.getElementById('numero_colegiatura').value = data.numeroColegiatura || '';
-
                     document.getElementById('profilePic').src = data.foto || '/uploads/default.jpg';
                 }
             })
@@ -55,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert('No se pudieron cargar los datos del médico.');
             });
     }
+    
 
     // Función para subir la foto de perfil
     function subirFoto(event) {
@@ -205,14 +208,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para validar sesión del médico
     async function validarSesionMedico() {
-        const response = await fetch('/api/sesion/medico');
-        if (!response.ok) {
-            throw new Error("Sesión no válida");
+        try {
+            const response = await fetch('/api/sesion/medico'); // Cambia según la ruta correcta
+            if (!response.ok) {
+                throw new Error("Sesión no válida");
+            }
+            const data = await response.json();
+            console.log("Sesión activa para el médico:", data);
+    
+            // Guarda los datos del médico en sessionStorage
+            sessionStorage.setItem('medicoId', data.medicoId || '');
+            sessionStorage.setItem('nombres', data.nombres || '');
+            sessionStorage.setItem('apellidos', data.apellidos || '');
+    
+            // Muestra el nombre del médico en la interfaz
+            const medicoNombre = data.nombres ? `Bienvenido Dr. ${data.nombres}` : 'Bienvenido Doctor';
+            document.getElementById('medicoNombre').textContent = medicoNombre;
+        } catch (error) {
+            console.error('Sesión no válida:', error);
+            alert("Sesión no válida. Por favor, inicia sesión.");
+            window.location.href = "/login.html";
         }
-        const data = await response.json();
-        console.log("Sesión activa para el médico:", data);
-        sessionStorage.setItem('medicoId', data.medicoId);
     }
+    
+    
 
     
 });

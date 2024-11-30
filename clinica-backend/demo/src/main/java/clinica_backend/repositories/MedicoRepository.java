@@ -26,8 +26,15 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Optional<Medico> findByCorreoAndContraseña(String correo, String contraseña);
 
     /**
+     * Obtiene todos los médicos que tienen una especialidad específica.
+     *
+     * @param especialidad Especialidad médica.
+     * @return Lista de médicos que coinciden con la especialidad proporcionada.
+     */
+    List<Medico> findByEspecialidad(String especialidad);
+
+    /**
      * Busca un médico por su correo.
-     * Este método se utiliza para obtener los detalles de un médico.
      *
      * @param correo Correo del médico.
      * @return Un {@link Optional} que contiene el médico si se encuentra, o vacío si no.
@@ -35,11 +42,31 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Optional<Medico> findByCorreo(String correo);
 
     /**
-     * Obtiene todos los médicos que tienen una especialidad específica.
+     * Busca un médico por su número de colegiatura.
      *
-     * @param especialidad Especialidad médica.
-     * @return Lista de médicos que coinciden con la especialidad proporcionada.
+     * @param numeroColegiatura Número de colegiatura del médico.
+     * @return Un {@link Optional} que contiene el médico si se encuentra, o vacío si no.
      */
-    List<Medico> findByEspecialidad(String especialidad);
-}
+    Optional<Medico> findByNumeroColegiatura(String numeroColegiatura);
 
+    /**
+     * Busca un médico por su DNI.
+     *
+     * @param dni DNI del médico.
+     * @return Un {@link Optional} que contiene el médico si se encuentra, o vacío si no.
+     */
+    Optional<Medico> findByDni(String dni);
+
+    
+      /**
+     * Busca médicos que coincidan parcialmente con los nombres, correo o DNI.
+     *
+     * @param nombres Nombre parcial o completo del médico.
+     * @param correo Correo parcial o completo del médico.
+     * @param dni DNI parcial o completo del médico.
+     * @return Lista de médicos que coincidan con los criterios de búsqueda.
+     */
+    List<Medico> findByNombresContainingIgnoreCaseOrCorreoContainingIgnoreCaseOrDniContainingIgnoreCase(
+            String nombres, String correo, String dni);
+    
+}
