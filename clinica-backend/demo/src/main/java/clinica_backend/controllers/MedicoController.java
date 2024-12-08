@@ -25,6 +25,7 @@ import clinica_backend.models.Medico;
 import clinica_backend.repositories.CitaRepository;
 import clinica_backend.repositories.MedicoRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 @RequestMapping("/medicos")
@@ -35,6 +36,10 @@ public class MedicoController {
 
     @Autowired
     private CitaRepository citaRepository;
+    
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Registro de médico desde formulario individual.
@@ -66,7 +71,11 @@ public class MedicoController {
             medico.setNombres(nombres);
             medico.setApellidos(apellidos);
             medico.setCorreo(correo);
-            medico.setContraseña(contraseña); // Asegúrate de encriptar esta contraseña en producción
+            
+            String contraseñaEncriptada = passwordEncoder.encode(contraseña);
+            medico.setContraseña(contraseñaEncriptada);
+
+            
             medico.setNumeroColegiatura(numeroColegiatura);
             medico.setEspecialidad(especialidad);
             medico.setDni(dni);

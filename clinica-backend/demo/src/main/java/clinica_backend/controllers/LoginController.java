@@ -16,6 +16,7 @@ import clinica_backend.models.Paciente;
 import clinica_backend.repositories.MedicoRepository;
 import clinica_backend.repositories.PacienteRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Controlador encargado de gestionar el proceso de inicio de sesión de pacientes y médicos.
@@ -28,6 +29,9 @@ public class LoginController {
 
     @Autowired
     private MedicoRepository medicoRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Credenciales predefinidas del administrador
     private static final String ADMIN_CORREO = "administradorclinica@hotmail.com";
@@ -51,33 +55,36 @@ public class LoginController {
             return "redirect:/dashboardAdministrador.html";
         }
 
-        // Autenticación del Paciente
-        Optional<Paciente> pacienteOpt = pacienteRepository
-                .findByCorreoAndContraseña(correo.trim(), contraseña.trim());
-
+        Optional<Paciente> pacienteOpt = pacienteRepository.findByCorreo(correo.trim());
         if (pacienteOpt.isPresent()) {
             Paciente paciente = pacienteOpt.get();
-            session.setAttribute("paciente", paciente);
-            session.setAttribute("pacienteId", paciente.getId());
-            session.setMaxInactiveInterval(30 * 60); // 30 minutos
 
-            System.out.println("Paciente autenticado con ID: " + paciente.getId());
-            return "redirect:/paginaprincipalPaciente.html";
+            // Verifica la contraseña encriptada
+            if (passwordEncoder.matches(contraseña.trim(), paciente.getContraseña())) {
+                session.setAttribute("paciente", paciente);
+                session.setAttribute("pacienteId", paciente.getId());
+                session.setMaxInactiveInterval(30 * 60); // 30 minutos
+                System.out.println("Paciente autenticado con ID: " + paciente.getId());
+                return "redirect:/paginaprincipalPaciente.html";
+            }
         }
+        
+        
+        Optional<Medico> medicOpt = medicoRepository.findByCorreo(correo.trim());
+         if (medicOpt.isPresent()) {
+            Medico medico = medicOpt.get();
 
-        // Autenticación del Médico
-        Optional<Medico> medicoOpt = medicoRepository
-                .findByCorreoAndContraseña(correo.trim(), contraseña.trim());
-
-                if (medicoOpt.isPresent()) {
-                    Medico medico = medicoOpt.get();
-                    session.setAttribute("medico", medico); // Objeto completo
-                    session.setAttribute("medicoId", medico.getId()); // Solo ID
-                    session.setMaxInactiveInterval(30 * 60); // Sesión de 30 minutos
-                    return "redirect:/paginaprincipalMedico.html";
-                }
-                
-                
+            // Verifica la contraseña encriptada
+            if (passwordEncoder.matches(contraseña.trim(), medico.getContraseña())) {
+                session.setAttribute("medico", medico);
+                session.setAttribute("medicoId", medico.getId()); // Solo ID
+                session.setMaxInactiveInterval(30 * 60); // 30 minutos
+                return "redirect:/paginaprincipalMedico.html";
+            }
+        }
+        
+        
+    
 
         // Credenciales inválidas
         System.out.println("Credenciales inválidas");

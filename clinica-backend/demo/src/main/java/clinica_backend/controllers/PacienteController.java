@@ -22,12 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 import clinica_backend.models.Paciente;
 import clinica_backend.repositories.PacienteRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 @Controller
 @RequestMapping("/pacientes")
 public class PacienteController {
 
     @Autowired
     private PacienteRepository pacienteRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Listar todos los pacientes o buscar por nombre, correo o DNI.
@@ -77,7 +81,10 @@ public class PacienteController {
             paciente.setNombres(nombres);
             paciente.setApellidos(apellidos);
             paciente.setCorreo(correo);
-            paciente.setContraseña(contraseña);
+            
+            String contraseñaEncriptada = passwordEncoder.encode(contraseña);
+            paciente.setContraseña(contraseñaEncriptada);
+            
             paciente.setCelular(celular);
             paciente.setDni(dni);
 
